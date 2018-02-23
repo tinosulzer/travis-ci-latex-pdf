@@ -1,4 +1,4 @@
 jobs:
   include:
     - stage: install
-      script: 2-texlive-pfdlatex/texlive_install.sh
+      script: ./2-texlive-pfdlatex/texlive_install.sh
