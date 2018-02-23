@@ -15,6 +15,7 @@ Thanks to [Dan Foreman-Mackey](http://dfm.io/posts/travis-latex/) for writing ab
 #### Pro:
 * automatically loops TeX and BibTeX as needed, and only as much as needed
 * automatically downloads LaTeX packages which are needed
+* can generate an index
 
 #### Con:
 * It's not really a disadvantage in general, but it can be: it does not use pdflatex to compile, but [Tectonic](https://tectonic-typesetting.github.io) which is a fork of XeTeX (thanks to [ShreevatsaR](https://tex.stackexchange.com/users/48/shreevatsar) for pointing this out). 
