@@ -3,6 +3,6 @@ notifications:
 jobs:
   include:
 #    - stage: install
-    - script: chmod +x $TRAVIS_BUILD_DIR/2-texlive-pdflatex/texlive/texlive_install.sh && $TRAVIS_BUILD_DIR/2-texlive-pdflatex/texlive/texlive_install.sh
+    - script: chmod +x $TRAVIS_BUILD_DIR/2-texlive-pdflatex/texlive_install.sh && $TRAVIS_BUILD_DIR/2-texlive-pdflatex/texlive_install.sh
 #    - stage: compile
 #      script: ./2-texlive-pdflatex/compile.sh
