@@ -3,7 +3,8 @@ notifications:
 jobs:
   include:
 #    - stage: install
-    - script: cd /home/travis/build/PHPirates/travis-ci-latex-pdf/texlivepfdlatex/
+    - script: cd $TRAVIS_BUILD_DIR/travis-ci-latex-pdf/
+    #&& cd /home/travis/build/PHPirates/travis-ci-latex-pdf/texlivepfdlatex/
     #&& chmod +x ./texlive_install.sh && ./texlive_install.sh
 #    - stage: compile
 #      script: ./2-texlive-pdflatex/compile.sh
