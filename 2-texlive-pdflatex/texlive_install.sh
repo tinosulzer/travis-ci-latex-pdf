@@ -15,8 +15,11 @@ if ! command -v texlua > /dev/null; then
   tar -xzf install-tl-unx.tar.gz
   cd install-tl-20*
 
+  BASEDIR=$(dirname "$0")
+  echo "$BASEDIR"
+
   # Install a minimal system
-  ./install-tl --profile=../texlive/texlive.profile
+  ./install-tl --profile=${BASEDIR}/texlive.profile
 
   cd ..
 fi
