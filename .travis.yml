@@ -1,7 +1,6 @@
 jobs:
   include:
 #    - stage: install
-    - script: ls -la
-    - script: cd 2texlivepfdlatex && chmod +x ./texlive_install.sh && ./texlive_install.sh
+    - script: cd ./2texlivepfdlatex/ && chmod +x ./texlive_install.sh && ./texlive_install.sh
 #    - stage: compile
 #      script: ./2-texlive-pdflatex/compile.sh
