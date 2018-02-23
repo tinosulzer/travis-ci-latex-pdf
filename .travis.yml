@@ -3,6 +3,6 @@ jobs:
     - stage: install
       script: pwd
       script: ls -la
-      script: ./2-texlive-pfdlatex/texlive_install.sh
+#      script: ./2-texlive-pfdlatex/texlive_install.sh
 #    - stage: compile
 #      script: ./2-texlive-pdflatex/compile.sh
