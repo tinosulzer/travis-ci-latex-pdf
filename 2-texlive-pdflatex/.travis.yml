@@ -1,7 +1,7 @@
 notifications:
   email: false
 install:
- - source ./texlive/texlive_install.sh
+ - source ./texlive_install.sh
 cache:
   directories:
     - /tmp/texlive

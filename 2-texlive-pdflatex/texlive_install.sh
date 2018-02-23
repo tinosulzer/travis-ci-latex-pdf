@@ -15,6 +15,7 @@ if ! command -v texlua > /dev/null; then
   tar -xzf install-tl-unx.tar.gz
   cd install-tl-20*
 
+  # Find directory this file is in, to find the texlive.profile file.
   BASEDIR=$(dirname "$0")
   echo "$BASEDIR"
 
