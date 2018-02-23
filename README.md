@@ -61,7 +61,7 @@ Want this? Instructions [below](#tinytex).
 ## <a name="tectonic">Instructions for building with Tectonic</a>
 
 * Go to [Travis CI](https://travis-ci.org) and enable the repository which contains a LaTeX file that you want to build.
-* Copy `.travis.yml` and specify the right tex and pdf file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`.
+* Copy `1-tectonic/.travis.yml` to top-level in your repo and specify the right tex and pdf file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`.
 * For deploying to GitHub releases, see the notes [below](#deploy).
 
 ## <a name="pdflatex">Instructions for building with pdflatex and TeX Live</a>
