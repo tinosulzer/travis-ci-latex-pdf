@@ -45,6 +45,15 @@
 \usepackage[noend]{algpseudocode} % Layout for algorithmicx package
 \usepackage{chngcntr} % Customise table/figure counters
 
+% Copy of local file C:/Program Files/SageMath 8.0/runtime/opt/sagemath-8.0/local/share/texmf/tex/latex/sagetex/sagetex.sty
+% Not pre se machine-independent, since it needs a specific sage version.
+\usepackage{sagetex}
+
+% Use: run LaTeX, run 'sage myfile.sagetex.sage' in Sage shell, run LaTeX again.
+
+% To typeset output in latex for sagecommandline environment
+\renewcommand{\sagecommandlinetextoutput}{False}
+
 \makeindex
 
 % Document
@@ -56,6 +65,14 @@
     \input{chapter1}
 
     They said~\cite{book1}.
+
+    \begin{sagecommandline}
+        sage: r,B = var('r,B')
+        sage: f = (x*r*B)/((1-x)^2 * (1-x*r))
+        sage: f.partial_fraction(x)
+    \end{sagecommandline}
+
+    Sage can compute $1+1=\sage{1+1}$.
 
     \bibliography{books}
     \bibliographystyle{plain}
