@@ -3,4 +3,4 @@
 sage: r,B = var('r,B')
 sage: f = (x*r*B)/((1-x)^2 * (1-x*r))
 sage: f.partial_fraction(x)
-%33afb3a78cdf10d46033a87721de41b2% md5sum of corresponding .sage file (minus "goboom", "current_tex_line", and pause/unpause lines)
+%a40f7c2d4e1925cffd981ff7db0bef12% md5sum of corresponding .sage file (minus "goboom", "current_tex_line", and pause/unpause lines)

@@ -45,8 +45,8 @@
 \usepackage[noend]{algpseudocode} % Layout for algorithmicx package
 \usepackage{chngcntr} % Customise table/figure counters
 
-% Copy of local file C:/Program Files/SageMath 8.0/runtime/opt/sagemath-8.0/local/share/texmf/tex/latex/sagetex/sagetex.sty
-% Not pre se machine-independent, since it needs a specific sage version.
+% Copy of local file C:/Program Files/SageMath 8.1/runtime/opt/sagemath-8.1/local/share/texmf/tex/latex/sagetex/sagetex.sty
+% Not per se machine-independent.
 \usepackage{sagetex}
 
 % Use: run LaTeX, run 'sage myfile.sagetex.sage' in Sage shell, run LaTeX again.
@@ -73,6 +73,17 @@
     \end{sagecommandline}
 
     Sage can compute $1+1=\sage{1+1}$.
+
+    \begin{sagesilent}
+        q = 1000000000001209
+        p = 4*q+1
+        sk_b = 32395235; pk_a = 423570969118299
+        h = mod(sk_b * pk_a, p)
+        cipher = 3752138087151167
+    \end{sagesilent}
+
+    Hidden message in $\sage{mod(h^-1 * cipher, p)}$.
+
 
     \bibliography{books}
     \bibliographystyle{plain}
