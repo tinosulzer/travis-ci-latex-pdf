@@ -1,3 +1,5 @@
+> NOTE Travis is currently migrating open source from travis-ci.org to travis-ci.com. Updates on migrating "coming soon" (according to their blog). For now: enable all new repositories on travis-ci.com.
+
 ### LaTeX + Git + Travis &rightarrow; release pdf
 
 [![Build Status](https://api.travis-ci.org/PHPirates/travis-ci-latex-pdf.svg)](https://travis-ci.org/PHPirates/travis-ci-latex-pdf)
