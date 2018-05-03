@@ -132,8 +132,16 @@ install:
 ```
 * If you are ready to release, just tag and push.
 * If you want the badge in your readme, just copy the code below to your readme and change the links.
+
+Markdown:
 ```markdown
 [![Build Status](https://api.travis-ci.org/username/reponame.svg)](https://travis-ci.org/username/reponame)
+```
+reStructuredText:
+```rst
+.. image:: https://travis-ci.org/username/reponame.svg?branch=master
+    :target: https://travis-ci.org/username/reponame
+    :alt: Build Status
 ```
 * Probably you want to edit settings on Travis to not build both on pull request and branch updates, and cancel running jobs if new ones are pushed.
 
