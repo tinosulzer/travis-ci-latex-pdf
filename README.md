@@ -1,4 +1,4 @@
-> NOTE Travis is currently migrating open source from travis-ci.org to travis-ci.com. Updates on migrating "coming soon" (according to their blog). For now: enable all new repositories on travis-ci.com.
+> Update May 2018 Travis is moving open source to travis-ci.com (instead of travis-ci.org). Travis is also now available as GitHub App in the Marketplace. Instructions are updated.
 
 ### LaTeX + Git + Travis &rightarrow; release pdf
 
@@ -61,8 +61,10 @@ Want this? Instructions [below](#tinytex).
 
 ## <a name="tectonic">Instructions for building with Tectonic</a>
 
-* Go to [Travis CI](https://travis-ci.org) and enable the repository which contains a LaTeX file that you want to build.
-* Copy `.travis.yml` and specify the right tex and pdf file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`. Also remove the `makeindex` line and the extra `tectonic` call if not using an index.
+* Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
+* Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
+* Copy `.travis.yml` and specify the right tex file in the `script` section in `.travis.yml`. Also remove the `makeindex` line and the extra `tectonic` call if not using an index.
+* Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
 
 ## <a name="pdflatex">Instructions for building with pdflatex and TeX Live</a>
@@ -89,9 +91,11 @@ This repo contains:
 
 ### How to use continuous integration for your LaTeX?
 
-* Go to [Travis CI](https://travis-ci.org) and enable the repository which contains a LaTeX file that you want to build.
+* * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
+  * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
 * Copy the files in the folder `2-texlive-pdflatex` to your repo, so `.travis.yml`, `texlive_install.sh` and `texlive/texlive.profile`.
 * Specify the right tex file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`.
+* Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * Tip from [gvacaliuc](https://github.com/gvacaliuc/travis-ci-latex-pdf): In order to maintain the install scripts in a central repo and link to them, you could also just use `.travis.yml` and replace
 ```yaml
 install:
@@ -106,14 +110,14 @@ install:
   - source ./texlive_install.sh
 ```
 * Optional: you could fork this repo so you can maintain your own build files with the right packages.
-* Optional: commit and push to check that the file builds.
 
 ## <a name="tinytex">Instructions for building with TeX Live and pdflatex via tinytex with R</a>
 
-* Go to [Travis CI](https://travis-ci.org) and enable the repository which contains a LaTeX file that you want to build.
+* * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
+  * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
 * Copy the files in the folder `3-tinytex` to your repo, so `.travis.yml` and `install_texlive.R`.
 * Specify the right tex file in `.travis.yml`.
-* Commit and push.
+* Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
 
 ## <a name="deploy">To automatically deploy pdfs to GitHub release</a>
@@ -123,31 +127,35 @@ install:
 * Run `gem install travis --no-rdoc --no-ri` to install the Travis Command-line Tool.
 ### For every new project
 * Remove the `deploy` section in the `.travis.yml` or use `--force` in the next command.
-* Go to the directory of your repository and run `travis setup releases`. Specify your GitHub credentials, and fill in anything for File to Upload. If it hangs in Git Bash, try to use Command Prompt.
+* Go to the directory of your repository, open the command prompt (Windows: <kbd>SHIFT</kbd>+<kbd>F10</kbd> <kbd>W</kbd> <kbd>ENTER</kbd>) and run `travis setup releases`. Specify your GitHub credentials, and fill in anything for File to Upload.
 * Replace everything below your encryped api key with (changing the path to your pdf file, probably the same folder as your tex file is in)
 ```yml
-  file: ./nameofmytexfile.pdf
+  file: 
+  - ./src/nameofmytexfile.pdf
+  - ./otherfile.pdf
   skip_cleanup: true
   on:
     tags: true
     branch: master
 ```
+* Commit and push.
 * If you are ready to release, just tag and push.
 * If you want the badge in your readme, just copy the code below to your readme and change the links.
 
 Markdown:
 ```markdown
-[![Build Status](https://api.travis-ci.org/username/reponame.svg)](https://travis-ci.org/username/reponame)
+[![Build Status](https://api.travis-ci.com/username/reponame.svg)](https://travis-ci.com/username/reponame)
 ```
 reStructuredText:
 ```rst
-.. image:: https://travis-ci.org/username/reponame.svg?branch=master
-    :target: https://travis-ci.org/username/reponame
+.. image:: https://travis-ci.com/username/reponame.svg?branch=master
+    :target: https://travis-ci.com/username/reponame
     :alt: Build Status
 ```
 * Probably you want to edit settings on Travis to not build both on pull request and branch updates, and cancel running jobs if new ones are pushed.
 
 #### Notes
+* You can tell Travis to skip the build for a certain commit by prefixing the commit message with `[ci skip]`.
 * If you want to build a private project, if you are a student you can use [travis-ci.com](https://travis-ci.com). Beware that you need a token to include the build status image in your readme, get the correct url by clicking on the build status on travis-ci.com.
 * Otherwise you could try SemaphoreCI, currently they give 100 private builds per month for free. If you do, it would be great if you could report back!
 
