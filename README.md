@@ -127,7 +127,7 @@ install:
 * Run `gem install travis --no-rdoc --no-ri` to install the Travis Command-line Tool.
 ### For every new project
 * Remove the `deploy` section in the `.travis.yml` or use `--force` in the next command.
-* Go to the directory of your repository, open the command prompt (Windows: <kbd>SHIFT</kbd>+<kbd>F10</kbd> <kbd>W</kbd> <kbd>ENTER</kbd>) and run `travis setup releases`. Specify your GitHub credentials, and fill in anything for File to Upload.
+* Go to the directory of your repository, open the command prompt (Windows: <kbd>SHIFT</kbd>+<kbd>F10</kbd> <kbd>W</kbd> <kbd>ENTER</kbd>) and run `travis setup releases --pro`. Specify your GitHub credentials, and fill in anything for File to Upload.
 * Replace everything below your encryped api key with (changing the path to your pdf file, probably the same folder as your tex file is in)
 ```yml
   file: 
