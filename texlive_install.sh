@@ -80,6 +80,7 @@ tlmgr install   \
   fvextra       \
   upquote       \
   lineno        \
+  ifplatform    \
   minted        \
   imakeidx
 
