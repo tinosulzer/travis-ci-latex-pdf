@@ -81,7 +81,8 @@ tlmgr install   \
   upquote       \
   lineno        \
   ifplatform    \
-  xstring    \
+  xstring       \
+  framed        \
   minted        \
   imakeidx
 
