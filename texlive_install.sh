@@ -83,6 +83,7 @@ tlmgr install   \
   ifplatform    \
   xstring       \
   framed        \
+  caption       \
   minted        \
   imakeidx
 
