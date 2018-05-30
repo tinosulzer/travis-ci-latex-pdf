@@ -84,6 +84,7 @@ tlmgr install   \
   xstring       \
   framed        \
   caption       \
+  collection-fontsrecommended \
   minted        \
   imakeidx
 
