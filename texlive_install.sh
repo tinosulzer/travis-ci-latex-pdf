@@ -78,6 +78,7 @@ tlmgr install   \
   multirow      \
   chngcntr      \
   fvextra       \
+  upquote       \
   minted        \
   imakeidx
 
