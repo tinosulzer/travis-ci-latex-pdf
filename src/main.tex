@@ -1,23 +1,18 @@
 %%
-%% Author: s156757
+%% Author: Thomas Schouten
 %% 21-10-2017
 %%
 
 % Preamble
-\documentclass{exam}
-% Test requiring some non-standard packages
+\documentclass{article}
 
-% todo
-\makeatletter
-\expandafter\providecommand\expandafter*\csname ver@framed.sty\endcsname
-{2003/07/21 v0.8a Simulated by exam}
-\makeatother
+% Test requiring some non-standard packages
 
 \usepackage[dutch]{babel} % May be necessary to delete auxiliary files after changing.
 \usepackage[fleqn]{amsmath} % left align equations option
 \usepackage{amsthm} % proof environments
 \usepackage{amssymb} % some symbols like probability P, or real number R
-\usepackage{mathtools} % improvement over amsmath, like \coloneqq 
+\usepackage{mathtools} % improvement over amsmath, like \coloneqq
 \usepackage{enumerate} % numbered list
 \usepackage{enumitem} % Provides [resume] option for enumerate
 \usepackage{thmtools} % define custom to prove environments
@@ -51,7 +46,7 @@
 \usepackage[noend]{algpseudocode} % Layout for algorithmicx package
 \usepackage{chngcntr} % Customise table/figure counters
 
-\usepackage[cache=false,newfloat]{minted} % to include syntax highlighted code
+\usepackage{minted} % to include syntax highlighted code
 \usepackage{caption} % to allow captions in minted code sections
 
 % Copy of local file C:/Program Files/SageMath 8.1/runtime/opt/sagemath-8.1/local/share/texmf/tex/latex/sagetex/sagetex.sty
@@ -95,11 +90,11 @@
 
     % Example from https://github.com/geekcomputers/Python/blob/master/Koch%20Curve/koch%20curve.py
     \begin{minted}{python}
-        #importing the libraries
-        #turtle standard graphics library for python
+        # importing the libraries
+        # turtle standard graphics library for python
         from turtle import *
 
-        #function to create koch snowflake or koch curve
+        # function to create koch snowflake or koch curve
         def snowflake(lengthSide, levels):
             if levels == 0:
                 forward(lengthSide)
@@ -113,20 +108,20 @@
             left(60)
             snowflake(lengthSide, levels-1)
 
-        #main function
+        # main function
         if __name__ == "__main__":
             speed(0)                    #defining the speed of the turtle
             length = 300.0              #
             penup()                     #Pull the pen up – no drawing when moving.
-            #Move the turtle backward by distance, opposite to the direction the turtle is headed.
-            #Do not change the turtle’s heading.
+            # Move the turtle backward by distance, opposite to the direction the turtle is headed.
+            # Do not change the turtle’s heading.
             backward(length/2.0)
             pendown()
             for i in range(3):
                 #Pull the pen down – drawing when moving.
                 snowflake(length, 4)
                 right(120)
-            #To control the closing windows of the turtle
+            # To control the closing windows of the turtle
             mainloop()
     \end{minted}
 

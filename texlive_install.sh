@@ -77,6 +77,7 @@ tlmgr install   \
   makecmds      \
   multirow      \
   chngcntr      \
+  fvextra       \
   minted        \
   imakeidx
 

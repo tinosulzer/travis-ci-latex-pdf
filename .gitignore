@@ -7,3 +7,6 @@ out/
 src/*.idx
 src/*.ilg
 src/*.ind
+
+# Minted generated files
+src/_minted-*/*
