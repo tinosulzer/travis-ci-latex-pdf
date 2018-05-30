@@ -79,6 +79,7 @@ tlmgr install   \
   chngcntr      \
   fvextra       \
   upquote       \
+  lineno        \
   minted        \
   imakeidx
 
