@@ -77,6 +77,15 @@ tlmgr install   \
   makecmds      \
   multirow      \
   chngcntr      \
+  fvextra       \
+  upquote       \
+  lineno        \
+  ifplatform    \
+  xstring       \
+  framed        \
+  caption       \
+  collection-fontsrecommended \
+  minted        \
   imakeidx
 
 # Keep no backups (not required, simply makes cache bigger)
