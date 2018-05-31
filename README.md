@@ -8,18 +8,18 @@ Write LaTeX, push to git, let Travis automatically build your file and release a
 
 # Choose your tools
 
-These were written with preference for the pdflatex engine, if you don't have that some pros and cons are irrelevant.
-
 ## 1. Miniconda with Tectonic engine
 
 Thanks to [Dan Foreman-Mackey](http://dfm.io/posts/travis-latex/) for writing about Tectonic.
+This method does not use the pdflatex engine to compile, but [Tectonic](https://tectonic-typesetting.github.io) which is a fork of XeTeX (thanks to [ShreevatsaR](https://tex.stackexchange.com/users/48/shreevatsar) for pointing this out). 
 
 #### Pro:
 * automatically loops TeX and BibTeX as needed, and only as much as needed
 * automatically downloads LaTeX packages which are needed
+* fast, because tectonic and packages are cached
 
 #### Con:
-* It's not really a disadvantage in general, but it can be: it does not use pdflatex to compile, but [Tectonic](https://tectonic-typesetting.github.io) which is a fork of XeTeX (thanks to [ShreevatsaR](https://tex.stackexchange.com/users/48/shreevatsar) for pointing this out). 
+* Tectonic does not support the `-shell-escape` flag at the moment (see [tectonic/#38](https://github.com/tectonic-typesetting/tectonic/issues/38)), which is required for example by the minted package. The pdflatex way (below) has been tested to work with the minted package.
 
 Build time example file: 1-2 minutes
 
@@ -31,12 +31,12 @@ Want this? Instructions [below](#tectonic).
 Thanks to [Joseph Wright](https://tex.stackexchange.com/users/73/joseph-wright) who pointed out that they use something based on this setup for LaTeX3 development.
 
 #### Pro:
-* Uses pdflatex to compile.
+* Uses pdflatex to compile, this can be a requirement for some cases like the minted package.
 * Fast, because of caching.
 
 #### Con:
 * You need to specify by hand which packages you need, and some may not be available in the package repository or under different names or with other packages as requirements.
-* You need to specify by hand how much times to compile to make sure references and bibtex references work.
+* You need to specify by hand how much times to compile to make sure references, indices and bibtex references work.
 
 Build time example file: 1-2 minutes
 
