@@ -86,6 +86,10 @@ tlmgr install   \
   caption       \
   collection-fontsrecommended \
   minted        \
+  pgfgantt      \
+  pdflscape     \
+  geometry      \
+  longtable     \
   imakeidx
 
 # Keep no backups (not required, simply makes cache bigger)
