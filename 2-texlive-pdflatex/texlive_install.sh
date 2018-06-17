@@ -90,6 +90,8 @@ tlmgr install   \
   pdflscape     \
   geometry      \
   longtable     \
+  beamer        \
+  translator    \
   imakeidx
 
 # Keep no backups (not required, simply makes cache bigger)
