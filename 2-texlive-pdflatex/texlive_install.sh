@@ -92,6 +92,8 @@ tlmgr install   \
   longtable     \
   beamer        \
   translator    \
+  environ       \
+  trimspaces    \
   imakeidx
 
 # Keep no backups (not required, simply makes cache bigger)
