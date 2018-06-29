@@ -111,6 +111,8 @@ install:
 ```
 * Optional: you could fork this repo so you can maintain your own build files with the right packages.
 
+Note that sometimes `tlmgr` selects a broken mirror to download TeX Live from, so you get an error like `Output was gpg: verify signatures failed: eof`. Restarting the build will probably fix this, it will auto-select a different mirror. (Thanks to [@jason-neal](https://github.com/jason-neal/travis-ci-latex-pdf-texlive/commit/d48a5f92d2394f27371dd32c94a16415de499058) for testing this.)
+
 ## <a name="tinytex">Instructions for building with TeX Live and pdflatex via tinytex with R</a>
 
 * * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
