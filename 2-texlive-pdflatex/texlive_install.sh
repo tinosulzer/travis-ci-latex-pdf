@@ -41,9 +41,9 @@ tlmgr install collection-langeuropean
 # Index of packages: http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
 # One package per line in texive_packages
-# We need to use a relative path here
-parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-tlmgr install $(cat ${parent_path}/texlive_packages)
+# We need to change the working directory before including a file
+cd "$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )"
+tlmgr install $(cat texlive_packages)
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
