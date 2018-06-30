@@ -1,3 +1,4 @@
+# We test each method for building LaTeX in a separate job.
 jobs:
   include:
       # Each script call is a separate job.
