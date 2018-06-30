@@ -17,5 +17,6 @@ jobs:
       latex: false
       pandoc: false
       warnings_are_errors: false
+      install: echo "Nothing occurs at installation, only script"
       script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
       cache: packages
