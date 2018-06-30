@@ -1,6 +1,3 @@
-notifications:
-  email: false
-
 before_install:
   # Install makeindex, if you do not use an index you can remove this (also remove the extra makeindex call).
   - sudo apt-get install texlive-binaries

@@ -40,48 +40,8 @@ tlmgr install collection-langeuropean
 
 # Index of packages: http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
-# pgf includes tikz
-tlmgr install   \
-  exam          \
-  amsmath       \
-  amsthm        \
-  amssymb       \
-  mathtools     \
-  enumerate     \
-  thmtools      \
-  stmaryrd      \
-  xcolor        \
-  pdfpages      \
-  centernot     \
-  pgf           \
-  cancel        \
-  hyperref      \
-  bookmark      \
-  pgfplots      \
-  bm            \
-  listings      \
-  graphicx      \
-  scalerel      \
-  stackengine   \
-  etoolbox      \
-  listofitems   \
-  marvosym      \
-  amsfonts      \
-  opensans      \
-  slantsc       \
-  fancyhdr      \
-  ulem          \
-  algorithms    \
-  algorithmicx  \
-  float         \
-  booktabs      \
-  enumitem      \
-  polynom       \
-  fancyvrb      \
-  makecmds      \
-  multirow      \
-  chngcntr      \
-  imakeidx
+# One package per line in texive_packages
+tlmgr install $(cat texlive_packages)
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
