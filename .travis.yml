@@ -2,11 +2,14 @@
 jobs:
   include:
       # Each script call is a separate job.
-#    - stage: build
     - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
     - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
-#    - stage: compile
-#      script: ./2-texlive-pdflatex/compile.sh
+    - language: r
+      sudo: true
+      latex: false
+      pandoc: false
+      warnings_are_errors: false
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
 
 cache:
   directories:
@@ -14,3 +17,4 @@ cache:
     - $HOME/.cache/Tectonic
     - /tmp/texlive
     - $HOME/.texlive
+    - packages
