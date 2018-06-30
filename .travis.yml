@@ -1,9 +1,7 @@
-notifications:
-  email: false
 jobs:
   include:
       # Each script call is a separate job.
-#    - stage: install
+#    - stage: build
     - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
 #    - stage: compile
 #      script: ./2-texlive-pdflatex/compile.sh
