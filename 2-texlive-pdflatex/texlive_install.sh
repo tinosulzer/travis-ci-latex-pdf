@@ -42,7 +42,7 @@ tlmgr install collection-langeuropean
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
 # One package per line in texive_packages
 # We need to change the working directory before including a file
-cd "$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )"
+cd "$(dirname "${BASH_SOURCE[0]}")"
 tlmgr install $(cat texlive_packages)
 
 # Keep no backups (not required, simply makes cache bigger)
