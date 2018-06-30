@@ -19,4 +19,9 @@ jobs:
       warnings_are_errors: false
       install: echo "The install step is required but does nothing now."
       script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
-      cache: packages
+      cache:
+        directories:
+          - packages
+          - /tmp/texlive
+          - $HOME/.texlive
+          - $HOME/.TinyTex
