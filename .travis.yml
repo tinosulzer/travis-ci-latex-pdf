@@ -1,27 +1,17 @@
-# We test each method for building LaTeX in a separate job.
-jobs:
-  include:
-    # Each script call is a separate job.
-    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
-      cache:
-        directories:
-          - $HOME/miniconda
-          - $HOME/.cache/Tectonic
-    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
-      cache:
-        directories:
-          - /tmp/texlive
-          - $HOME/.texlive
-    - language: r
-      sudo: true
-      latex: false
-      pandoc: false
-      warnings_are_errors: false
-      install: echo "The install step is required but does nothing now."
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
-      cache:
-        directories:
-          - packages
-          - /tmp/texlive
-          - $HOME/.texlive
-          - $HOME/.TinyTex
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker pull rekka/tectonic
+  - docker run -d -p 127.0.0.1:80:4567 rekka/tectonic /bin/sh -c "cd ./src/; tectonic ./main.tex;"
+  - docker ps -a
+  - docker run rekka/tectonic /bin/sh -c "cd ./src/; tectonic ./main.tex;"
+
+script: # Change working directory each time so including files will work.
+ - cd ./src/
+ # Tectonic does not include makeindex, so that needs to be done manually.
+ - tectonic ./main.tex
+ - makeindex ./main.idx
+ - tectonic ./main.tex --print
