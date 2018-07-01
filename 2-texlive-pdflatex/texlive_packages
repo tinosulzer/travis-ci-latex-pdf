@@ -38,7 +38,7 @@ ifplatform
 xstring
 framed
 caption
-collectionfontsrecommended
+collection-fontsrecommended
 minted
 pgfgantt
 geometry
