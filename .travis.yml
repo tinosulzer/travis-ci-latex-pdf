@@ -5,9 +5,9 @@ services:
 
 before_install:
   - docker pull rekka/tectonic
-  - docker run -d -p 127.0.0.1:80:4567 rekka/tectonic /bin/sh -c "cd ./src/; tectonic ./main.tex;"
-  - docker ps -a
-  - docker run rekka/tectonic /bin/sh -c "cd ./src/; tectonic ./main.tex;"
+#  - docker run -d -p 127.0.0.1:80:4567 rekka/tectonic /bin/sh -c "cd ./src/; tectonic ./main.tex;"
+#  - docker ps -a
+#  - docker run rekka/tectonic /bin/sh -c "cd ./src/; tectonic ./main.tex;"
 
 script: # Change working directory each time so including files will work.
  - cd ./src/
