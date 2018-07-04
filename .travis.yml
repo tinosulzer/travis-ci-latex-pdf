@@ -3,15 +3,9 @@ sudo: required
 services:
   - docker
 
-before_install:
+script:
+  # We use the docker image from https://hub.docker.com/r/rekka/tectonic/
   - docker pull rekka/tectonic
-#  - docker run -d -p 127.0.0.1:80:4567 rekka/tectonic /bin/sh -c "cd ./src/; tectonic ./main.tex;"
-#  - docker ps -a
-#  - docker run rekka/tectonic /bin/sh -c "cd ./src/; tectonic ./main.tex;"
-
-script: # Change working directory each time so including files will work.
- - cd ./src/
- # Tectonic does not include makeindex, so that needs to be done manually.
- - tectonic ./main.tex
- - makeindex ./main.idx
- - tectonic ./main.tex --print
+  # interactively:
+  # docker run -it --mount src=`pwd`,target=/usr/src/tex,type=bind rekka/tectonic
+  docker run --mount src=`pwd`,target=/usr/src/tex,type=bind rekka/tectonic tectonic main.tex
