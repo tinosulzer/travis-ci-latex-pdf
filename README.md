@@ -8,7 +8,7 @@ Write LaTeX, push to git, let Travis automatically build your file and release a
 
 # Choose your tools
 
-## 1. Miniconda with Tectonic engine
+## 1. Tectonic
 
 Thanks to [Dan Foreman-Mackey](http://dfm.io/posts/travis-latex/) for writing about Tectonic.
 This method does not use the pdflatex engine to compile, but [Tectonic](https://tectonic-typesetting.github.io) which is a fork of XeTeX (thanks to [ShreevatsaR](https://tex.stackexchange.com/users/48/shreevatsar) for pointing this out). 
@@ -17,10 +17,41 @@ This method does not use the pdflatex engine to compile, but [Tectonic](https://
 * automatically loops TeX and BibTeX as needed, and only as much as needed
 * automatically downloads LaTeX packages which are needed
 * can generate an index
-* fast, because tectonic and packages are cached
+* fastest build time
 
 #### Con:
 * Tectonic does not support the `-shell-escape` flag at the moment (see [tectonic/#38](https://github.com/tectonic-typesetting/tectonic/issues/38)), which is required for example by the minted package. The pdflatex way (below) has been tested to work with the minted package.
+
+We will quickly compare two methods to use Tectonic.
+
+## 1a. Docker image with Tectonic
+
+Thanks to [Norbert Pozar (@rekka)](https://tectonic.newton.cx/t/small-docker-image-for-tectonic/133?u=phpirates) for providing the Docker image.
+Docker provides the ability to download a pre-installed Tectonic and then run it on you LaTeX files.
+
+#### Pro:
+* Tectonic is ready really fast, because downloading the image is all it takes
+* The complete build time is the fastest of all methods
+* The Docker image is really small, around 50MB
+
+
+#### Con:
+* No option (yet) to automatically deploy pdfs to GitHub
+
+Build time example file: one minute
+
+Want this? Instructions [below](#tectonic-docker).
+
+## 1b. Miniconda with Tectonic
+
+#### Pro:
+
+* It is also fast because tectonic and packages are cached
+* Can automatically deploy pdfs
+
+#### Con:
+* A bit slower
+* Cache is bigger, although still small enough to not really be a disadvantage
 
 Build time example file: 1-2 minutes
 
@@ -60,11 +91,18 @@ Build time example file: 5-8 minutes
 
 Want this? Instructions [below](#tinytex).
 
-## <a name="tectonic">Instructions for building with Tectonic</a>
+## <a name="tectonic">Instructions for building with Docker and Tectonic</a>
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy `1-tectonic/.travis.yml` and specify the right tex file in the `script` section in `.travis.yml`. Also remove the `makeindex` line and the extra `tectonic` call if not using an index.
+* Copy `1a-tectonic-docker/.travis.yml` and specify the right tex file in the last line. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
+* Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
+
+## <a name="tectonic">Instructions for building with Miniconda and Tectonic</a>
+
+* Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
+* Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
+* Copy `1b-tectonic-miniconda/.travis.yml` and specify the right tex file in the `script` section in `.travis.yml`. Also remove the `makeindex` line and the extra `tectonic` call if not using an index.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
 
