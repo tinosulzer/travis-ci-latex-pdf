@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copied from 1-tectonic/.travis.yml without comments
+# Copied from 1b-tectonic-miniconda/.travis.yml without comments
 export PATH="$HOME/miniconda/bin:$PATH"
 if ! command -v conda > /dev/null; then
   wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
