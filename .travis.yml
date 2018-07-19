@@ -2,20 +2,27 @@
 jobs:
   include:
     # Each script call is a separate job.
-    - sudo: required
+    - stage: tectonic-docker
+      language: generic
+      sudo: required
       services: docker
       script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
-    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
+    - stage: tectonic-miniconda
+      language: generic
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
       cache:
         directories:
           - $HOME/miniconda
           - $HOME/.cache/Tectonic
-    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
+    - stage: texlive-pdflatex
+      language: generic
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
       cache:
         directories:
           - /tmp/texlive
           - $HOME/.texlive
-    - language: r
+    - stage: tinytex
+      language: r
       sudo: true
       latex: false
       pandoc: false
