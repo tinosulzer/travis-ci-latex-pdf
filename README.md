@@ -21,6 +21,7 @@ This method does not use the pdflatex engine to compile, but [Tectonic](https://
 
 #### Con:
 * Tectonic does not support the `-shell-escape` flag at the moment (see [tectonic/#38](https://github.com/tectonic-typesetting/tectonic/issues/38)), which is required for example by the minted package. The pdflatex way (below) has been tested to work with the minted package.
+* Tectonic does not natively support biber for compiling references, though it can be made to work. See [below](#biber) for a workaround.
 
 We will quickly compare two methods to use Tectonic.
 
@@ -105,6 +106,19 @@ Want this? Instructions [below](#tinytex).
 * Copy `1b-tectonic-miniconda/.travis.yml` and specify the right tex file in the `script` section in `.travis.yml`. Also remove the `makeindex` line and the extra `tectonic` call if not using an index.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
+
+## <a name="biber">Instructions for running biber with Tectonic</a>
+
+* Install biber version 2.5 either from [sourceforge](https://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.5/binaries/), or with conda `conda install -c malramsay biber==2.5` 
+* Run tectonic once to create intermediate files, followed by biber, and finally complete compilation of the document with tectonic.
+
+```shell
+tectonic --keep-intermediates --reruns 0 ./main.tex
+biber main
+tectonic ./main.tex
+```
+
+* For more information Malcolm Ramsay has a [blog post](https://malramsay.com/post/compiling_latex_on_travis/) documenting this use case.
 
 ## <a name="pdflatex">Instructions for building with pdflatex and TeX Live</a>
 
