@@ -8,9 +8,13 @@ if ! command -v conda > /dev/null; then
   conda config --add channels conda-forge;
   conda config --set always_yes yes;
   conda update --all;
-  conda install tectonic;
+  conda install tectonic==0.1.8;
 fi
+conda install -c malramsay biber==2.5
 conda info -a
 
 cd ${TRAVIS_BUILD_DIR}/src/
-tectonic ./main.tex --print
+tectonic --keep-intermediates --reruns 0 ./main.tex
+if [ -f "main.bcf" ]; then biber main; fi
+tectonic --keep-intermediates ./main.tex
+makeindex ./main.idx

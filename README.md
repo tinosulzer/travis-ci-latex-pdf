@@ -49,6 +49,7 @@ Want this? Instructions [below](#tectonic-docker).
 
 * It is also fast because tectonic and packages are cached
 * Can automatically deploy pdfs
+* Can work with Biber, thanks to [Malcolm Ramsay](https://github.com/PHPirates/travis-ci-latex-pdf/pull/11) who made it work.
 
 #### Con:
 * A bit slower
@@ -81,12 +82,13 @@ Thanks to [Hugh](https://tex.stackexchange.com/users/18414/hugh) for pointing ou
 
 #### Pro:
 
-* Uses pdflatex.
+* Uses pdflatex
 * Automatically installs packages needed
+* Works with Biber
 
 #### Con:
-* You need to specify how much times to compile.
-* Build time is very long.
+* You need to specify how much times to compile
+* Build time is very long
 
 Build time example file: 5-8 minutes
 
@@ -118,7 +120,7 @@ biber main
 tectonic ./main.tex
 ```
 
-* For more information Malcolm Ramsay has a [blog post](https://malramsay.com/post/compiling_latex_on_travis/) documenting this use case.
+* Following this project, Malcolm Ramsay has a great [blog post](https://malramsay.com/post/compiling_latex_on_travis/) documenting this use case in a very complete way.
 
 ## <a name="pdflatex">Instructions for building with pdflatex and TeX Live</a>
 
