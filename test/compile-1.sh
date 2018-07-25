@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Copied from 1b-tectonic-miniconda/.travis.yml without comments
-sudo apt-get -y install texlive-binaries
+sudo apt-get install texlive-binaries
 export PATH="$HOME/miniconda/bin:$PATH"
 if ! command -v conda > /dev/null; then
   wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
@@ -11,7 +11,7 @@ if ! command -v conda > /dev/null; then
   conda update --all;
   conda install tectonic==0.1.8;
 fi
-conda install -c malramsay biber==2.5
+conda install -c malramsay biber==2.5 --yes
 conda info -a
 
 cd ${TRAVIS_BUILD_DIR}/src/
