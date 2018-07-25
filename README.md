@@ -109,8 +109,9 @@ Want this? Instructions [below](#tinytex).
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
 
-## <a name="biber">Instructions for running biber with Tectonic</a>
+### <a name="biber">Instructions for running biber with Miniconda and Tectonic</a>
 
+These changes have already been added to the `.travis.yml`, but to be clear here are the separate instructions if you already have Miniconda and Tectonic running:
 * Install biber version 2.5 either from [sourceforge](https://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.5/binaries/), or with conda `conda install -c malramsay biber==2.5` 
 * Run tectonic once to create intermediate files, followed by biber, and finally complete compilation of the document with tectonic.
 
