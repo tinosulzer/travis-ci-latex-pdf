@@ -17,5 +17,5 @@ conda info -a
 cd ${TRAVIS_BUILD_DIR}/src/
 tectonic --keep-intermediates --reruns 0 ./main.tex
 if [ -f "main.bcf" ]; then biber main; fi
-tectonic --keep-intermediates ./main.tex
-makeindex ./main.idx
+#tectonic --keep-intermediates ./main.tex
+#makeindex ./main.idx
