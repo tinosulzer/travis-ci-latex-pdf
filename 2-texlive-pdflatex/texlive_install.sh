@@ -20,6 +20,7 @@ if ! command -v texlua > /dev/null; then
 #  echo "$BASEDIR"
 #  echo "$TRAVIS_BUILD_DIR"
 
+   chmod +x ../texlive.profile
   # Install a minimal system
   ./install-tl --profile=../texlive.profile
 
