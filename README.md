@@ -98,7 +98,7 @@ Build time example file: 5-8 minutes
 
 Want this? Instructions [below](#tinytex).
 
-## <a name="tectonic">Instructions for building with Docker and Tectonic</a>
+## <a name="tectonic-docker">Instructions for building with Docker and Tectonic</a>
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
