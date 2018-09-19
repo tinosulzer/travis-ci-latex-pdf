@@ -23,7 +23,7 @@ install:
       conda config --add channels conda-forge;
       conda config --set always_yes yes;
       conda update --all;
-      conda install tectonic==0.1.8;
+      conda install tectonic==0.1.9;
     fi
   # Install biber if required for compiling the references.
   # Biber 2.5 is required for tectonic 0.1.8
