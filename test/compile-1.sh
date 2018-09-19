@@ -8,7 +8,6 @@ if ! command -v conda > /dev/null; then
   bash miniconda.sh -b -p $HOME/miniconda -u;
   conda config --add channels conda-forge;
   conda config --set always_yes yes;
-  conda update --all;
   conda install tectonic==0.1.8;
 fi
 conda install -c malramsay biber==2.5 --yes
