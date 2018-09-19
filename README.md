@@ -38,10 +38,12 @@ Docker provides the ability to download a pre-installed Tectonic and then run it
 * Tectonic is ready really fast, because downloading the image is all it takes
 * The complete build time is the fastest of all methods
 * The Docker image is really small, around 50MB
+* Works with bibtex automatically
 
 
 #### Con:
 * No option (yet) to automatically deploy pdfs to GitHub
+* Doesn't work with biber (yet, though it could be made to do it)
 
 Build time example file: one minute
 
