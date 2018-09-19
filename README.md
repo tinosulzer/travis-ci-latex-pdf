@@ -42,7 +42,6 @@ Docker provides the ability to download a pre-installed Tectonic and then run it
 
 
 #### Con:
-* No option (yet) to automatically deploy pdfs to GitHub
 * Doesn't work with biber (yet, though it could be made to do it)
 
 Build time example file: one minute
