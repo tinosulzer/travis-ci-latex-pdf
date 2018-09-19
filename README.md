@@ -105,6 +105,7 @@ Want this? Instructions [below](#tinytex).
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
 * Copy `1a-tectonic-docker/.travis.yml` and specify the right tex file in the last line. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
+* For deploying to GitHub releases, see the notes [below](#deploy).
 
 ## <a name="tectonic">Instructions for building with Miniconda and Tectonic</a>
 
