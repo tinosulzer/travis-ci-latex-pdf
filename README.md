@@ -39,10 +39,9 @@ Docker provides the ability to download a pre-installed Tectonic and then run it
 * The complete build time is the fastest of all methods
 * The Docker image is really small, around 50MB
 * Works with bibtex automatically
-
+* Can automatically deploy pdfs
 
 #### Con:
-* No option (yet) to automatically deploy pdfs to GitHub
 * Doesn't work with biber (yet, though it could be made to do it)
 
 Build time example file: one minute
@@ -106,6 +105,7 @@ Want this? Instructions [below](#tinytex).
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
 * Copy `1a-tectonic-docker/.travis.yml` and specify the right tex file in the last line. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
+* For deploying to GitHub releases, see the notes [below](#deploy).
 
 ## <a name="tectonic">Instructions for building with Miniconda and Tectonic</a>
 
