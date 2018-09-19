@@ -33,6 +33,8 @@ cache:
     - $HOME/miniconda
     - $HOME/.cache/Tectonic
 script: # Change working directory each time so including files will work. Change back so the pdfs can be found for deployment. This way, building multiple files goes well.
+  # Note, if you want to use the tl2018 package bundle, replace tectonic calls with
+  # tectonic -w https://newton.cx/~peter/files/tlextras-2018.1dev.tar myfile.tex
  - cd ./src/
  # Run tectonic once to generate intermediate files
  - tectonic --keep-intermediates --reruns 0 ./main.tex
