@@ -1,37 +1,21 @@
-# We test each method for building LaTeX in a separate job.
-jobs:
-  include:
-    # Each script call is a separate job.
-    - stage: tectonic-docker
-      language: generic
-      sudo: required
-      services: docker
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
-    - stage: tectonic-miniconda
-      language: generic
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
-      cache:
-        directories:
-          - $HOME/miniconda
-          - $HOME/.cache/Tectonic
-    - stage: texlive-pdflatex
-      language: generic
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
-      cache:
-        directories:
-          - /tmp/texlive
-          - $HOME/.texlive
-    - stage: tinytex
-      language: r
-      sudo: true
-      latex: false
-      pandoc: false
-      warnings_are_errors: false
-      install: echo "The install step is required but does nothing now."
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
-      cache:
-        directories:
-          - packages
-          - /tmp/texlive
-          - $HOME/.texlive
-          - $HOME/.TinyTex
+sudo: required
+
+language: generic
+services: docker
+
+script:
+  # We use the docker image from https://hub.docker.com/r/rekka/tectonic/
+  - docker pull rekka/tectonic
+  # interactively:
+  # docker run -it --mount src=`pwd`,target=/usr/src/tex,type=bind rekka/tectonic
+  - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic main.tex
+deploy:
+  provider: releases
+  api_key:
+    secure: g26d7XwkfvZI0qM/i0ikpPmUGPTaafrAcDpLO19oKixZmGdSjgGNZ6o1YR4LBd6NScdn/1VDI9krDfdmrhfxbKAuYCEYCyke/s9E3r8YhJmpBCjjUSMbfgEixEvrugvo4gH7bOqD6dJIjvIfhhnHzaipmz0kT/Py5T0U6bM2YU+pmwQHBoyu9JrN6IHs7HJRfXCFZlTJ614vTmNlQoctWwLWHzniEJCUU7y2+APpEuRjfxDjMlOgDPQsFeHZqp4WgCYkYXjQ1jLf2yL21FyvgLApjiBYL65mvTexczYlU96cTvr+14gpqIHEG37ohLfWv/ubp8XRrMGHLARjjG2JqZWObXYmGRvZIFMJW5yqReB9+Tks/Huzg+PlM5uhBgcYiJ0yBewmbiVw1DsEvSucPzRF9Tg0ZDuvYrGeLBHpamkKveDZL7ohRFH316csLUHDOP9tu2a4wUL0DX2EG3SriWunAYOU/0uuCnd6yfsTNzvUeqpYPCp0I7hl2oZdYX6xrs1u5bo1SxtgwE6hU9sK0WtEjJuHmpKAIX839krybpWYj+zf9sZcYZYijOBRP2gH7I5MTzV18ff/g7bo4NUXrGRRP2Gc0+mHD42uXoGc+QcuB4YyKhIxJuylcV9crhn1kISOcFf2xk7ZL37XzCU0kGA+abUAL1t1sutYcg7+5jc=
+  file:
+  - ./src/main.pdf
+  skip_cleanup: true
+  on:
+    tags: true
+branch: master  
