@@ -1,13 +1,6 @@
 sudo:       required
 services:   docker
-## When you have done the travis encrypting, then it should look
-## something like this
-# env:
-#   global:
-#     secure: ENCRYPTED-GITHUBTOKEN
 
 script:
-- docker pull strauman/travis-latexbuild:latest
-- docker run --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind strauman/travis-latexbuild:latest
-#after_success:
-#- . .travis/push.sh
+- docker pull strauman/travis-latexbuild:small # small texlive scheme
+- docker run --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind strauman/travis-latexbuild:small # also here
