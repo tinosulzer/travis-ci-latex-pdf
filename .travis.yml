@@ -1,37 +1,8 @@
-# We test each method for building LaTeX in a separate job.
-jobs:
-  include:
-    # Each script call is a separate job.
-    - stage: tectonic-docker
-      language: generic
-      sudo: required
-      services: docker
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
-    - stage: tectonic-miniconda
-      language: generic
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
-      cache:
-        directories:
-          - $HOME/miniconda
-          - $HOME/.cache/Tectonic
-    - stage: texlive-pdflatex
-      language: generic
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
-      cache:
-        directories:
-          - /tmp/texlive
-          - $HOME/.texlive
-    - stage: tinytex
-      language: r
-      sudo: true
-      latex: false
-      pandoc: false
-      warnings_are_errors: false
-      install: echo "The install step is required but does nothing now."
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
-      cache:
-        directories:
-          - packages
-          - /tmp/texlive
-          - $HOME/.texlive
-          - $HOME/.TinyTex
+sudo: required
+language: generic
+services: docker
+
+script:
+- docker pull dxjoke/tectonic-docker:personal
+- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind dxjoke/tectonic-docker
+  /bin/sh -c "tectonic --keep-intermediates --reruns 0 biber-mwe.tex; biber biber-mwe; tectonic biber-mwe.tex"

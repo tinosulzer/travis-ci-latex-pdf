@@ -1,0 +1,12 @@
+\documentclass{article}
+
+\usepackage[autostyle]{csquotes}
+
+\usepackage[backend=biber, natbib=true]{biblatex}
+\addbibresource{books.bib}
+
+\begin{document}
+    Lorem ipsum dolor sit amet~\citep{book1}.
+    At vero eos et accusam et justo duo dolores et ea rebum~\citet{knuth1990}.
+    \printbibliography
+\end{document}
