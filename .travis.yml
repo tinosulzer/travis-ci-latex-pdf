@@ -1,17 +1,18 @@
 sudo: required
 language: generic
 services: docker
-
 script:
 - docker pull dxjoke/tectonic-docker:personal
-- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic --keep-intermediates --reruns 0 biber-mwe.tex; biber biber-mwe; tectonic biber-mwe.tex; tectonic main.tex"
+- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind dxjoke/tectonic-docker
+  /bin/sh -c "tectonic --keep-intermediates --reruns 0 biber-mwe.tex; biber biber-mwe;
+  tectonic biber-mwe.tex; tectonic main.tex"
 deploy:
   provider: releases
   api_key:
-    secure: GK0T9i6YKZlKmxurW4B8lkBGCfUcehODrWA8VcuUaK4CgSYaVj2BzMJj4E7pA3Ucm76bGR9l1yWYA+RHRwg0033A8Tw54hIinAcwiuXCpRwgcVkbbxK77o8Q4g0ooRPAMePtkQrjeq1JgHN2sZUZ2CixhtCDApM8H4yaQW7bb7TmBFut/9YEfiJVBCAE0ZNjbjXSbYADRc9Zh1fy/53xJzgKC57dQnFDrnEsGlwRkrv5lQK+3Dw7ktd48pQe8C3c2LNZn052gaR0TxxzDBAyvG4nmeA17wYMvZk7UhfKYVdqUjNqwyjktvWQQDOAtWL7OrlBNfWyf5bEn1RsfsnZ7lX/3uTj1z2fQeaYcx29goSo6y7cemz+UFsuoG3ggMuD1V81xkLI82WglYnbDEd7wij5kj1+/YAliiiZtO98kLUXbyPKWq0ycmPjj1PKyiX1Gk4LMtPfvDEIdhm/uShCY+6PrOxnGPAEd+gKgA8kAdhkuZ1/IZjkbz0dQpoZgJse7V71x+cop8fvHsuFUcj/irk4qzfVkfhnKuNpMtq2z6HDvQ/GDkZKUTkNaok8rWGFGhE8TiXCoaEoWUASEQcqouQY8KHjqQT6JVgKLwsoPuA34Pb5Fb6tbFzrNT5QE7GTeoVa9GPXJ3IrKepdcRAo3I8GVEyH0rWItdWBH0tU7fo=
+    secure: BbXIQxnNO10t196betzxKEg+bli8atpIzT8Q6R12+1E2wyEfY2rK6UXG1i850N1V7BsECurtWLelzHr9PkYxHT5rSDeZ1OY9+6xZw+zvQXq0itxg+H0OGqlAKCNiPuKEhnzbFSE0LEyheGXmOqfsKvhfjqnP0V8hCuWyI5BMfURrXXcDvwkR0pjudIJaKsYXvR03WNdRSFDfaujdEFseH7LaWtgN4jDTGXLhN7jSElYU+613cj1xSSNTNMA77c7BZRx88YqF0fRbQ4YIhS1j05XpRvJ+uwkcwOH0UsIPF/ZQlB+KsTLkCVQ6EAfZl/l6Qqwrp+gIFmhTKHIx6BSGV64nJ6W0UR7vji6eG5SuNH6Km0JimHKh2P09NedgxJTlYT3jgJL62V2QcqP69KOO+lexIiO4Xt/uQe0BalFlQlDkozJf+vPRMokz29HJRBeYqtXpYI0vD/Nw1Eg1mgLTMtbnqu5iovnWFAQBotAyb5NAbOw+W3nEune3wsIzeMdeAlP6EU/HSanuINw9DqUYoEmliTqlxcQcaJ2kENSrFJ6/BJ2VNpPNJ7lG6z1mZC7HfM6NSsXnwrSFjzZRuEgQp1vCc0pK8/QCvqlmv6DBWxCtV+9W6+DsokwsDSapXz5J+NdLWGSO9sxVX1fVtgeDp5UM6yfyywh7BQTf3GZjhWg=
   file:
   - ./src/biber-mwe.pdf
   - ./src/main.pdf
-  skip_cleanup: true
+  
   on:
-    tags: true
+    repo: WtfJoke/travis-ci-latex-pdf
