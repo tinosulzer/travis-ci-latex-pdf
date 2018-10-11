@@ -1,18 +1,37 @@
-sudo: required
-language: generic
-services: docker
-script:
-- docker pull dxjoke/tectonic-docker
-- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind dxjoke/tectonic-docker
-  /bin/sh -c "tectonic --keep-intermediates --reruns 0 biber-mwe.tex; biber biber-mwe;
-  tectonic biber-mwe.tex; tectonic main.tex"
-deploy:
-  provider: releases
-  api_key:
-    secure: QSoTn4PSO/ta3g39DUuXz0vdC8LeYUFDJeH8zli/8S4ely/Qv2MaZ8AKPPPeWzbq8pwFO+OvZCPTC9Wi6dQNhco00qzKhAfTLwYjz8ZzE19YM/F6tskrLs+DczMGeNKphzKkhKr/I8Jm5e+P7ol7vpZ9ANJPyirUqkZ9WQ1UZJnkWuDZtnd3VOg6WybPmQT8tpmKVXUQTmVk86RwlC0Hc7Ffi8cqjlqcAG24kTT29EPccvGreO0npn229YKgHxCwSiCN78zYCucd9gt7LRAgqm5IsIzWAHcxhL/I43C8f6ygSCzlLSvxrj03wKznCUYYl9tCkPeKRgFeMeUiHdvSOTKChNbaV8K5KQYYyUtXVrd2fASRXDG29PbV4aVIdKlisO8Cr97UepPR2dLl/Go8kbsCPd45FFKB04Qi5vbnomvVwSKlwHf9nyl57bFZuF6NOKkqqqUrxBbAIjYg7icM/cMq1gsqIWnicikcaacMMsrklbSXBUmjeZTTGbCVmPuo9m7b1L/mMLnZ8dSYIJ0eWqjLNKlaywNRKDjYrZKuIrx9WvD/DxjWIgDUhJn0kR+sWiYKv7+z/X0oUA5DKhreJH8ZiUMuao+lKkqhQxbrBfRjLgsCthmaoEu9mkxH1YD3dm4Wxd91is1xCkp1HnsRnW8tfaRRmSsk1/sboTHCSDA=
-  file:
-  - ./src/biber-mwe.pdf
-  - ./src/main.pdf
-  
-  on:
-    repo: WtfJoke/travis-ci-latex-pdf
+# We test each method for building LaTeX in a separate job.
+jobs:
+  include:
+    # Each script call is a separate job.
+    - stage: tectonic-docker
+      language: generic
+      sudo: required
+      services: docker
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
+    - stage: tectonic-miniconda
+      language: generic
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
+      cache:
+        directories:
+          - $HOME/miniconda
+          - $HOME/.cache/Tectonic
+    - stage: texlive-pdflatex
+      language: generic
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
+      cache:
+        directories:
+          - /tmp/texlive
+          - $HOME/.texlive
+    - stage: tinytex
+      language: r
+      sudo: true
+      latex: false
+      pandoc: false
+      warnings_are_errors: false
+      install: echo "The install step is required but does nothing now."
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
+      cache:
+        directories:
+          - packages
+          - /tmp/texlive
+          - $HOME/.texlive
+- $HOME/.TinyTex
