@@ -2,11 +2,12 @@
 
 \usepackage[autostyle]{csquotes}
 
-\usepackage[backend=biber, natbib=true]{biblatex}
-\addbibresource{books.bib}
+\usepackage{biblatex}
+\addbibresource{somebooks.bib}
 
 \begin{document}
-    Lorem ipsum dolor sit amet~\citep{book1}.
-    At vero eos et accusam et justo duo dolores et ea rebum~\citet{knuth1990}.
+    Lorem ipsum dolor sit amet~\cite{book1}.
+    At vero eos et accusam et justo duo dolores et ea rebum~\cite{knuth1990}.
+
     \printbibliography
 \end{document}
