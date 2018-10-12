@@ -34,4 +34,4 @@ jobs:
           - packages
           - /tmp/texlive
           - $HOME/.texlive
-- $HOME/.TinyTex
+          - $HOME/.TinyTex
