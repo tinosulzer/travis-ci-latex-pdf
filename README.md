@@ -22,10 +22,10 @@ This method does not use the pdflatex engine to compile, but [Tectonic](https://
 * automatically downloads LaTeX packages which are needed
 * can generate an index
 * fastest build time
+* also can use biber
 
 #### Con:
 * Tectonic does not support the `-shell-escape` flag at the moment (see [tectonic/#38](https://github.com/tectonic-typesetting/tectonic/issues/38)), which is required for example by the minted package. The pdflatex way (below) has been tested to work with the minted package.
-* Tectonic does not natively support biber for compiling references, though it can be made to work. See [below](#biber) for a workaround.
 
 We will quickly compare two methods to use Tectonic.
 
@@ -105,7 +105,9 @@ Want this? Instructions [below](#tinytex).
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy `1a-tectonic-docker/.travis.yml` and specify the right tex file in the last line. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
+* Copy `1a-tectonic-docker/.travis.yml` and specify the right tex file in the line with `docker run`. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
+* If you want to compile multiple files, you can replace `tectonic main.tex` by `tectonic main.tex; tectonic main2.tex`.
+* If you want to use biber, you can use `tectonic --keep-intermediates --reruns 0 main.tex; biber main; tectonic main.tex`
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
 
