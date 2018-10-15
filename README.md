@@ -105,7 +105,7 @@ Want this? Instructions [below](#tinytex).
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy `1a-tectonic-docker/.travis.yml` and specify the right tex file in the line with `docker run`. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
+* Copy [`1a-tectonic-docker/.travis.yml`](1a-tectonic-docker/.travis.yml) and specify the right tex file in the line with `docker run`. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
 * If you want to compile multiple files, you can replace `tectonic main.tex` by `tectonic main.tex; tectonic main2.tex`.
 * If you want to use biber, you can use `tectonic --keep-intermediates --reruns 0 main.tex; biber main; tectonic main.tex`
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
@@ -115,11 +115,11 @@ Want this? Instructions [below](#tinytex).
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy `1b-tectonic-miniconda/.travis.yml` and specify the right tex file in the `script` section in `.travis.yml`. Also remove the `makeindex` line and the extra `tectonic` call if not using an index.
+* Copy [`1b-tectonic-miniconda/.travis.yml`](1b-tectonic-miniconda/.travis.yml) and specify the right tex file in the `script` section in `.travis.yml`. You can uncomment the `makeindex` line and the extra `tectonic` call if you want to use an index.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
 
-### <a name="biber">Instructions for running biber with Miniconda and Tectonic</a>
+### <a name="biber">Separate instructions for adding biber to your Miniconda and Tectonic setup</a>
 
 These changes have already been added to the `.travis.yml`, but to be clear here are the separate instructions if you already have Miniconda and Tectonic running:
 * Install biber version 2.5 either from [sourceforge](https://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.5/binaries/), or with conda `conda install -c malramsay biber==2.5` 
@@ -160,7 +160,7 @@ This repo contains:
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
  * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy the files in the folder `2-texlive-pdflatex` to your repo, so `.travis.yml`, `texlive_install.sh`, `texlive_packages` and `texlive.profile`.
+* Copy the files in the folder [`2-texlive-pdflatex`](2-texlive-pdflatex) to your repo, so `.travis.yml`, `texlive_install.sh`, `texlive_packages` and `texlive.profile`.
 * Specify the right tex file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * If you need additional packages, you can add them to the `texlive_packages` file. An index of existing packages is for example at http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/

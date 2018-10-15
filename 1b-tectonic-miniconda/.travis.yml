@@ -40,10 +40,12 @@ script: # Change working directory each time so including files will work. Chang
  - tectonic --keep-intermediates --reruns 0 ./main.tex
  # If a bcf file exists run biber to compile references
  - if [ -f "main.bcf" ]; then biber main; fi
- # Run tectonic to finalise formatting
- - tectonic --keep-intermediates ./main.tex
+
+ # Only needed when using an index:
+# - tectonic --keep-intermediates ./main.tex
  # Tectonic does not include makeindex, so that needs to be done manually.
- - makeindex ./main.idx
+# - makeindex ./main.idx
+
  # Final run of tectonic to create output
  - tectonic ./main.tex --print
  - cd ../
