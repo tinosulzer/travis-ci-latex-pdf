@@ -136,6 +136,7 @@ tectonic ./main.tex
 ## <a name="pdflatex">Instructions for building with pdflatex and TeX Live</a>
 
 If for some reason you prefer the pdflatex engine with the TeX Live distribution, read on.
+This is based on the [LaTeX3 build file](https://github.com/latex3/latex3/blob/master/support/texlive.sh).
 
 This method installs an almost minimal TeX Live installation on Travis, and compiles with pdflatex.
 This repo contains:
@@ -155,10 +156,10 @@ This repo contains:
 
 
 
-### How to use continuous integration for your LaTeX?
+### Instructions
 
-* * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
-  * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
+* Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
+ * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
 * Copy the files in the folder `2-texlive-pdflatex` to your repo, so `.travis.yml`, `texlive_install.sh`, `texlive_packages` and `texlive.profile`.
 * Specify the right tex file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
@@ -225,15 +226,15 @@ reStructuredText:
 ```
 * Probably you want to edit settings on Travis to not build both on pull request and branch updates, and cancel running jobs if new ones are pushed.
 
-#### Notes
+## Notes
 * You can tell Travis to skip the build for a certain commit by prefixing the commit message with `[ci skip]`.
-* If you want to build a private project, if you are a student you can use [travis-ci.com](https://travis-ci.com). Beware that you need a token to include the build status image in your readme, get the correct url by clicking on the build status on travis-ci.com.
-* Otherwise you could try SemaphoreCI, currently they give 100 private builds per month for free. If you do, it would be great if you could report back!
+* There are much more CI services than just Travis, for example CircleCI or SemaphoreCI and [much more](https://github.com/ligurio/awesome-ci). If you manage to use one of them, it would be great if you could report back!
 
-##### References for original setup with pdflatex and TeX Live
 I also put some of these instructions on the [TeX Stackexchange](https://tex.stackexchange.com/questions/398830/how-to-build-my-latex-automatically-with-pdflatex-using-travis-ci/398831#398831).
-
-In the end the install script from the original repo was completely rewritten based on the [LaTeX3 build file](https://github.com/latex3/latex3/blob/master/support/texlive.sh).
 
 Some original thoughts from [harshjv's blog](https://harshjv.github.io/blog/setup-latex-pdf-build-using-travis-ci/), and thanks to [jackolney](https://github.com/jackolney/travis-ci-latex-pdf) for all his attempts to put it into practice.
 Also see harshjv's original [blog post](https://harshjv.github.io/blog/document-building-versioning-with-tex-document-git-continuous-integration-dropbox/).
+
+## Contributing
+
+If you want to add/update a method to build LaTeX, look in the [contributing guidelines](.github/contributing.rst).
