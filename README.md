@@ -157,16 +157,16 @@ This repo contains:
 * Tip from [gvacaliuc](https://github.com/gvacaliuc/travis-ci-latex-pdf): In order to maintain the install scripts in a central repo and link to them, you could also just copy `.travis.yml` and replace
 ```yaml
 install:
- - source ./texlive_install.sh
+ - source ./texlive/texlive_install.sh
 ```
 with
 ```yaml
 install:
-  - mkdir ../texlive/
-  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive.profile > ../texlive/texlive.profile
-  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive_packages > ./texlive_packages
-  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/texlive_install.sh > ./texlive_install.sh
-  - source ./texlive_install.sh
+  - mkdir ./texlive/
+  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive.profile > ./texlive/texlive.profile
+  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive_packages > ./texlive/texlive_packages
+  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive_install.sh > ./texlive/texlive_install.sh
+  - source ./texlive/texlive_install.sh
 ```
 * Preferably you fork this repo so you can maintain your own build files with the right packages.
 
