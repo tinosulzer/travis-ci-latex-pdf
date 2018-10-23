@@ -22,8 +22,7 @@ install:
       bash miniconda.sh -b -p $HOME/miniconda -u;
       conda config --add channels conda-forge;
       conda config --set always_yes yes;
-      conda update --all;
-      conda install tectonic==0.1.8;
+      conda install tectonic==0.1.10;
     fi
   # Install biber if required for compiling the references.
   # Biber 2.5 is required for tectonic 0.1.8
@@ -34,15 +33,19 @@ cache:
     - $HOME/miniconda
     - $HOME/.cache/Tectonic
 script: # Change working directory each time so including files will work. Change back so the pdfs can be found for deployment. This way, building multiple files goes well.
+  # Note, if you want to use the tl2018 package bundle, replace tectonic calls with
+  # tectonic -w https://newton.cx/~peter/files/tlextras-2018.1dev.tar myfile.tex
  - cd ./src/
  # Run tectonic once to generate intermediate files
  - tectonic --keep-intermediates --reruns 0 ./main.tex
  # If a bcf file exists run biber to compile references
  - if [ -f "main.bcf" ]; then biber main; fi
- # Run tectonic to finalise formatting
- - tectonic --keep-intermediates ./main.tex
+
+ # Only needed when using an index:
+# - tectonic --keep-intermediates ./main.tex
  # Tectonic does not include makeindex, so that needs to be done manually.
- - makeindex ./main.idx
+# - makeindex ./main.idx
+
  # Final run of tectonic to create output
  - tectonic ./main.tex --print
  - cd ../
