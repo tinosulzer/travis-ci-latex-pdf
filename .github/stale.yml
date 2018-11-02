@@ -15,4 +15,5 @@ markComment: >
   comment to keep the issue open, explaining why.
 # Comment to post when closing a stale issue. Set to `false` to disable
 closeComment: >
-  This issue has been automatically closed because no further activity occurred. Please leave a comment if this was incorrect.
+  This issue has been automatically closed because no further activity occurred.
+  Please leave a comment if this was incorrect.
