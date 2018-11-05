@@ -16,7 +16,7 @@ script:
 - docker run --name latex-container --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind strauman/travis-latexbuild:small /bin/sh -c "tlmgr update --self"
 - docker commit latex-container latex-image
 # Select small texlive scheme
-- docker run --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind latex-image
+- docker run --entrypoint=sh --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind latex-image
 
 deploy:
   provider: releases
