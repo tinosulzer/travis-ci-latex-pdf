@@ -33,7 +33,7 @@ We will quickly compare two methods to use Tectonic.
 
 Thanks to [Norbert Pozar (@rekka)](https://tectonic.newton.cx/t/small-docker-image-for-tectonic/133?u=phpirates) for providing the original Docker image.
 [Manuel (@WtfJoke)](https://github.com/WtfJoke) extended it by integrating biber.
-Docker provides the ability to download a pre-installed Tectonic and then run it on you LaTeX files.
+Docker provides the ability to download a pre-installed Tectonic and then run it on your LaTeX files.
 
 #### Pro:
 * Tectonic is ready really fast, because downloading the image is all it takes
@@ -44,9 +44,9 @@ Docker provides the ability to download a pre-installed Tectonic and then run it
 * Works with biber
 
 #### Con:
-* None, so far :)
+* Slower than the other methods because all packages have to be reinstalled every time
 
-Build time example file: one minute
+Build time example file: two minutes
 
 Want this? Instructions [below](#tectonic-docker).
 
@@ -59,7 +59,6 @@ Want this? Instructions [below](#tectonic-docker).
 * Can work with Biber, thanks to [Malcolm Ramsay](https://github.com/PHPirates/travis-ci-latex-pdf/pull/11) who made it work.
 
 #### Con:
-* A bit slower
 * Cache is bigger, although still small enough to not really be a disadvantage
 
 Build time example file: 1-2 minutes
