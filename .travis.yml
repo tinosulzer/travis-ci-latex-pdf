@@ -16,7 +16,11 @@ script:
 - docker run --name latex-container --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind strauman/travis-latexbuild:small /bin/sh -c "tlmgr update --self"
 - docker commit latex-container latex-image
 # Select small texlive scheme
-- docker run --entrypoint=sh --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind latex-image
+# By default the container starts with the command given the first time, so we have to reset it.
+# https://docs.docker.com/engine/reference/run/#entrypoint-default-command-to-execute-at-runtime
+- docker run --entrypoint="" --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind latex-image
+
+#- docker run --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind strauman/travis-latexbuild:small
 
 deploy:
   provider: releases
