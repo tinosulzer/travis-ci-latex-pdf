@@ -2,11 +2,11 @@
 jobs:
   include:
     # Each script call is a separate job.
-#    - stage: tectonic-docker
-#      language: generic
-#      sudo: required
-#      services: docker
-#      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
+    - stage: tectonic-docker
+      language: generic
+      sudo: required
+      services: docker
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
     - stage: tectonic-miniconda
       language: generic
       script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
