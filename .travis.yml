@@ -1,19 +1,22 @@
 # We test each method for building LaTeX in a separate job.
+language: generic
+
 jobs:
   include:
-    # Each script call is a separate job.
-    - language: generic
-    - sudo: required
+    # Each - starts a separate job
     - services: docker
-    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
+      sudo: required
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
     - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
     - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
-    - cache:
-        directories:
-          - /tmp/texlive
-          - $HOME/.texlive
-          - $HOME/miniconda
-          - $HOME/.cache/Tectonic
+
+cache:
+  directories:
+    - /tmp/texlive
+    - $HOME/.texlive
+    - $HOME/miniconda
+    - $HOME/.cache/Tectonic
+
 # Disable this test because it's broken and nobody uses it anyway
 #    - stage: tinytex
 #      language: r
