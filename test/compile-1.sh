@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Workaround, see https://github.com/tectonic-typesetting/tectonic/issues/131
+sudo mkdir -p ~/.config/Tectonic/
+echo "[[default_bundles]]" > ~/.config/Tectonic/config.toml
+echo "url = \"https://tectonic.newton.cx/bundles/tlextras-2018.1r0/bundle.tar\"" >> ~/.config/Tectonic/config.toml
+
 # Copied from 1b-tectonic-miniconda/.travis.yml without comments
 sudo apt-get install texlive-binaries
 export PATH="$HOME/miniconda/bin:$PATH"
