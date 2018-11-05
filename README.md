@@ -146,7 +146,7 @@ This repo contains:
 - The TeX Live install script `texlive_install.sh` including profile `texlive/texlive.profile` (specifies for example the TeX Live scheme)
 - A Travis configuration file
 - Demonstration LaTeX files in `src/`
-- Besides the list of packages that get installed in `texlive_install.sh`, you can see a list of packages in `main.tex` which you can all use with this install.
+- Besides the list of packages that get installed in `texlive_install.sh`, you can see a demonstration list of packages in `main.tex` which you can all use with this install.
 
 ### Features
 
@@ -165,8 +165,8 @@ This repo contains:
  * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
 * Copy the files in the folder [`2-texlive-pdflatex`](2-texlive-pdflatex) to your repo, so `.travis.yml` and the `texlive/` folder.
 * Specify the right tex file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`.
+* Add all the required LaTeX packages to `texlive/texlive_packages`, by checking at https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained (which may be different than the LaTeX package name).
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
-* If you need additional packages, you can add them to the `texlive_packages` file. An index of existing packages is for example at http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/
 (Thanks to [@jason-neal](https://github.com/PHPirates/travis-ci-latex-pdf/pull/6) for improving this)
 * Tip from [gvacaliuc](https://github.com/gvacaliuc/travis-ci-latex-pdf): In order to maintain the install scripts in a central repo and link to them, you could also just copy `.travis.yml` and replace
 ```yaml

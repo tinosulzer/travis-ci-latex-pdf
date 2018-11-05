@@ -37,7 +37,12 @@ tlmgr install collection-latex
 # Install babel languages
 tlmgr install collection-langeuropean
 
-# Index of packages: http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/
+# Common fonts with hard to debug errors if not found
+tlmgr install collection-fontsrecommended
+
+# An index of packages: http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/
+# Or better, check https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained
+
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
 # One package per line in texive_packages
 # We need to change the working directory before including a file
