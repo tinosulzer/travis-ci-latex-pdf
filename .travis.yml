@@ -1,34 +1,10 @@
-# We test each method for building LaTeX in a separate job.
+sudo: required
 language: generic
+services: docker
 
-jobs:
-  include:
-    # Each - starts a separate job
-    - services: docker
-      sudo: required
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
-    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
-    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
-
-cache:
-  directories:
-    - /tmp/texlive
-    - $HOME/.texlive
-    - $HOME/miniconda
-    - $HOME/.cache/Tectonic
-
-# Disable this test because it's broken and nobody uses it anyway
-#    - stage: tinytex
-#      language: r
-#      sudo: true
-#      latex: false
-#      pandoc: false
-#      warnings_are_errors: false
-#      install: echo "The install step is required but does nothing now."
-#      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
-#      cache:
-#        directories:
-#          - packages
-#          - /tmp/texlive
-#          - $HOME/.texlive
-#          - $HOME/.TinyTex
+script:
+  # We use the docker image from https://hub.docker.com/r/dxjoke/tectonic-docker/
+  # Compiling only main.tex:
+  - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic main.tex"
+  # Compiling multiple files as well as using biber:
+#  - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic --keep-intermediates --reruns 0 biber-mwe.tex; biber biber-mwe; tectonic biber-mwe.tex; tectonic main.tex"
