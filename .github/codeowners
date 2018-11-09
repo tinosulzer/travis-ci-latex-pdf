@@ -1,2 +1,5 @@
-# Global owners, automatically request review when pull request is submitted
+/3-texlive-docker/ @strauman
+/test/texlive-docker-test.sh @strauman
+
+# Global owners, always automatically request review when pull request is submitted
 * @PHPirates
