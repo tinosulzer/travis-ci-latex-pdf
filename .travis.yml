@@ -1,26 +1,34 @@
-sudo:       required
-language:   generic
-services:   docker
+# We test each method for building LaTeX in a separate job.
+language: generic
 
-# Docs of the options: https://github.com/Strauman/travis-latexbuild/tree/master#configuration-options
-tex-config:
-- tex-scheme=small
-- push-type=none
-- build-pattern=src/main.tex,src/mwe.tex
-#- latexmk-flags=-dvi -f
-# Check at https://www.ctan.org/pkg/package-name in which TeX Live package a LaTeX package is contained.
-- packages=xkeyval, collection-latex, collection-langeuropean, exam, amsmath, amscls, mathtools, thmtools, stmaryrd, xcolor, pdfpages, pgf, cancel, hyperref, pgfplots, listings, scalerel, stackengine, etoolbox, listofitems, marvosym, amsfonts, opensans, slantsc, fancyhdr, ulem, algorithms, algorithmicx, float, booktabs, enumitem, polynom, fancyvrb, makecmds, multirow, chngcntr, fvextra, upquote, lineno, ifplatform, xstring, framed, caption, collection-fontsrecommended, minted, pgfgantt, geometry, beamer, translator, environ, trimspaces, imakeidx, graphics, tools, oberdiek
+jobs:
+  include:
+    # Each - starts a separate job
+    - services: docker
+      sudo: required
+      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
+    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
+    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
 
-script:
-- docker run --mount src=$TRAVIS_BUILD_DIR/,target=/repo,type=bind strauman/travis-latexbuild:small
+cache:
+  directories:
+    - /tmp/texlive
+    - $HOME/.texlive
+    - $HOME/miniconda
+    - $HOME/.cache/Tectonic
 
-deploy:
-  provider: releases
-  api_key:
-    secure: GK0T9i6YKZlKmxurW4B8lkBGCfUcehODrWA8VcuUaK4CgSYaVj2BzMJj4E7pA3Ucm76bGR9l1yWYA+RHRwg0033A8Tw54hIinAcwiuXCpRwgcVkbbxK77o8Q4g0ooRPAMePtkQrjeq1JgHN2sZUZ2CixhtCDApM8H4yaQW7bb7TmBFut/9YEfiJVBCAE0ZNjbjXSbYADRc9Zh1fy/53xJzgKC57dQnFDrnEsGlwRkrv5lQK+3Dw7ktd48pQe8C3c2LNZn052gaR0TxxzDBAyvG4nmeA17wYMvZk7UhfKYVdqUjNqwyjktvWQQDOAtWL7OrlBNfWyf5bEn1RsfsnZ7lX/3uTj1z2fQeaYcx29goSo6y7cemz+UFsuoG3ggMuD1V81xkLI82WglYnbDEd7wij5kj1+/YAliiiZtO98kLUXbyPKWq0ycmPjj1PKyiX1Gk4LMtPfvDEIdhm/uShCY+6PrOxnGPAEd+gKgA8kAdhkuZ1/IZjkbz0dQpoZgJse7V71x+cop8fvHsuFUcj/irk4qzfVkfhnKuNpMtq2z6HDvQ/GDkZKUTkNaok8rWGFGhE8TiXCoaEoWUASEQcqouQY8KHjqQT6JVgKLwsoPuA34Pb5Fb6tbFzrNT5QE7GTeoVa9GPXJ3IrKepdcRAo3I8GVEyH0rWItdWBH0tU7fo=
-  file:
-  - ./src/main.pdf
-  - ./src/mwe.pdf
-  skip_cleanup: true
-  on:
-    tags: true
+# Disable this test because it's broken and nobody uses it anyway
+#    - stage: tinytex
+#      language: r
+#      sudo: true
+#      latex: false
+#      pandoc: false
+#      warnings_are_errors: false
+#      install: echo "The install step is required but does nothing now."
+#      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
+#      cache:
+#        directories:
+#          - packages
+#          - /tmp/texlive
+#          - $HOME/.texlive
+#          - $HOME/.TinyTex

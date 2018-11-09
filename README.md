@@ -22,28 +22,31 @@ This method does not use the pdflatex engine to compile, but [Tectonic](https://
 * automatically downloads LaTeX packages which are needed
 * can generate an index
 * fastest build time
+* also can use biber
 
 #### Con:
 * Tectonic does not support the `-shell-escape` flag at the moment (see [tectonic/#38](https://github.com/tectonic-typesetting/tectonic/issues/38)), which is required for example by the minted package. The pdflatex way (below) has been tested to work with the minted package.
-* Tectonic does not natively support biber for compiling references, though it can be made to work. See [below](#biber) for a workaround.
 
 We will quickly compare two methods to use Tectonic.
 
 ## 1a. Docker image with Tectonic
 
-Thanks to [Norbert Pozar (@rekka)](https://tectonic.newton.cx/t/small-docker-image-for-tectonic/133?u=phpirates) for providing the Docker image.
-Docker provides the ability to download a pre-installed Tectonic and then run it on you LaTeX files.
+Thanks to [Norbert Pozar (@rekka)](https://tectonic.newton.cx/t/small-docker-image-for-tectonic/133?u=phpirates) for providing the original Docker image.
+[Manuel (@WtfJoke)](https://github.com/WtfJoke) extended it by integrating biber.
+Docker provides the ability to download a pre-installed Tectonic and then run it on your LaTeX files.
 
 #### Pro:
 * Tectonic is ready really fast, because downloading the image is all it takes
 * The complete build time is the fastest of all methods
-* The Docker image is really small, around 50MB
-
+* The Docker image is really small, around 75MB
+* Works with bibtex automatically
+* Can automatically deploy pdfs
+* Works with biber
 
 #### Con:
-* No option (yet) to automatically deploy pdfs to GitHub
+* Slower than the other methods because all packages have to be reinstalled every time
 
-Build time example file: one minute
+Build time example file: two minutes
 
 Want this? Instructions [below](#tectonic-docker).
 
@@ -56,7 +59,6 @@ Want this? Instructions [below](#tectonic-docker).
 * Can work with Biber, thanks to [Malcolm Ramsay](https://github.com/PHPirates/travis-ci-latex-pdf/pull/11) who made it work.
 
 #### Con:
-* A bit slower
 * Cache is bigger, although still small enough to not really be a disadvantage
 
 Build time example file: 1-2 minutes
@@ -98,22 +100,28 @@ Build time example file: 5-8 minutes
 
 Want this? Instructions [below](#tinytex).
 
-## <a name="tectonic">Instructions for building with Docker and Tectonic</a>
+
+# Instructions for each build method
+
+## <a name="tectonic-docker">Instructions for building with Docker and Tectonic</a>
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy `1a-tectonic-docker/.travis.yml` and specify the right tex file in the last line. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
+* Copy [`1a-tectonic-docker/.travis.yml`](1a-tectonic-docker/.travis.yml) and specify the right tex file in the line with `docker run`. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
+* If you want to compile multiple files, you can replace `tectonic main.tex` by `tectonic main.tex; tectonic main2.tex`.
+* If you want to use biber, you can use `tectonic --keep-intermediates --reruns 0 main.tex; biber main; tectonic main.tex`
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
+* For deploying to GitHub releases, see the notes [below](#deploy).
 
 ## <a name="tectonic">Instructions for building with Miniconda and Tectonic</a>
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy `1b-tectonic-miniconda/.travis.yml` and specify the right tex file in the `script` section in `.travis.yml`. Also remove the `makeindex` line and the extra `tectonic` call if not using an index.
+* Copy [`1b-tectonic-miniconda/.travis.yml`](1b-tectonic-miniconda/.travis.yml) and specify the right tex file in the `script` section in `.travis.yml`. You can uncomment the `makeindex` line and the extra `tectonic` call if you want to use an index.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
 
-### <a name="biber">Instructions for running biber with Miniconda and Tectonic</a>
+### <a name="biber">Separate instructions for adding biber to your Miniconda and Tectonic setup</a>
 
 These changes have already been added to the `.travis.yml`, but to be clear here are the separate instructions if you already have Miniconda and Tectonic running:
 * Install biber version 2.5 either from [sourceforge](https://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.5/binaries/), or with conda `conda install -c malramsay biber==2.5` 
@@ -130,13 +138,14 @@ tectonic ./main.tex
 ## <a name="pdflatex">Instructions for building with pdflatex and TeX Live</a>
 
 If for some reason you prefer the pdflatex engine with the TeX Live distribution, read on.
+This is based on the [LaTeX3 build file](https://github.com/latex3/latex3/blob/master/support/texlive.sh).
 
 This method installs an almost minimal TeX Live installation on Travis, and compiles with pdflatex.
 This repo contains:
 - The TeX Live install script `texlive_install.sh` including profile `texlive/texlive.profile` (specifies for example the TeX Live scheme)
 - A Travis configuration file
 - Demonstration LaTeX files in `src/`
-- Besides the list of packages that get installed in `texlive_install.sh`, you can see a list of packages in `main.tex` which you can all use with this install.
+- Besides the list of packages that get installed in `texlive_install.sh`, you can see a demonstration list of packages in `main.tex` which you can all use with this install.
 
 ### Features
 
@@ -149,28 +158,28 @@ This repo contains:
 
 
 
-### How to use continuous integration for your LaTeX?
+### Instructions
 
-* * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
-  * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy the files in the folder `2-texlive-pdflatex` to your repo, so `.travis.yml`, `texlive_install.sh`, `texlive_packages` and `texlive.profile`.
+* Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
+ * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
+* Copy the files in the folder [`2-texlive-pdflatex`](2-texlive-pdflatex) to your repo, so `.travis.yml` and the `texlive/` folder.
 * Specify the right tex file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`.
+* Add all the required LaTeX packages to `texlive/texlive_packages`, by checking at https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained (which may be different than the LaTeX package name).
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
-* If you need additional packages, you can add them to the `texlive_packages` file. An index of existing packages is for example at http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/
 (Thanks to [@jason-neal](https://github.com/PHPirates/travis-ci-latex-pdf/pull/6) for improving this)
 * Tip from [gvacaliuc](https://github.com/gvacaliuc/travis-ci-latex-pdf): In order to maintain the install scripts in a central repo and link to them, you could also just copy `.travis.yml` and replace
 ```yaml
 install:
- - source ./texlive_install.sh
+ - source ./texlive/texlive_install.sh
 ```
 with
 ```yaml
 install:
-  - mkdir ../texlive/
-  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive.profile > ../texlive/texlive.profile
-  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive_packages > ./texlive_packages
-  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/texlive_install.sh > ./texlive_install.sh
-  - source ./texlive_install.sh
+  - mkdir ./texlive/
+  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive.profile > ./texlive/texlive.profile
+  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive_packages > ./texlive/texlive_packages
+  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive_install.sh > ./texlive/texlive_install.sh
+  - source ./texlive/texlive_install.sh
 ```
 * Preferably you fork this repo so you can maintain your own build files with the right packages.
 
@@ -219,15 +228,15 @@ reStructuredText:
 ```
 * Probably you want to edit settings on Travis to not build both on pull request and branch updates, and cancel running jobs if new ones are pushed.
 
-#### Notes
+## Notes
 * You can tell Travis to skip the build for a certain commit by prefixing the commit message with `[ci skip]`.
-* If you want to build a private project, if you are a student you can use [travis-ci.com](https://travis-ci.com). Beware that you need a token to include the build status image in your readme, get the correct url by clicking on the build status on travis-ci.com.
-* Otherwise you could try SemaphoreCI, currently they give 100 private builds per month for free. If you do, it would be great if you could report back!
+* There are much more CI services than just Travis, for example CircleCI or SemaphoreCI and [much more](https://github.com/ligurio/awesome-ci). If you manage to use one of them, it would be great if you could report back!
 
-##### References for original setup with pdflatex and TeX Live
 I also put some of these instructions on the [TeX Stackexchange](https://tex.stackexchange.com/questions/398830/how-to-build-my-latex-automatically-with-pdflatex-using-travis-ci/398831#398831).
-
-In the end the install script from the original repo was completely rewritten based on the [LaTeX3 build file](https://github.com/latex3/latex3/blob/master/support/texlive.sh).
 
 Some original thoughts from [harshjv's blog](https://harshjv.github.io/blog/setup-latex-pdf-build-using-travis-ci/), and thanks to [jackolney](https://github.com/jackolney/travis-ci-latex-pdf) for all his attempts to put it into practice.
 Also see harshjv's original [blog post](https://harshjv.github.io/blog/document-building-versioning-with-tex-document-git-continuous-integration-dropbox/).
+
+## Contributing
+
+If you want to add/update a method to build LaTeX, look in the [contributing guidelines](.github/contributing.rst).

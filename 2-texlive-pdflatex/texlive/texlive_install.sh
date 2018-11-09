@@ -16,11 +16,10 @@ if ! command -v texlua > /dev/null; then
   cd install-tl-20*
 
   # Find directory this file is in, to find the texlive.profile file.
-  BASEDIR=$(dirname "$BASH_SOURCE")
-  echo "$BASEDIR"
+  BASEDIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
   # Install a minimal system
-  ./install-tl --profile=${BASEDIR}/texlive.profile
+  ./install-tl --profile="$BASEDIR"/texlive.profile
 
   cd ..
 fi
@@ -38,7 +37,12 @@ tlmgr install collection-latex
 # Install babel languages
 tlmgr install collection-langeuropean
 
-# Index of packages: http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/
+# Common fonts with hard to debug errors if not found
+tlmgr install collection-fontsrecommended
+
+# An index of packages: http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/
+# Or better, check https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained
+
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
 # One package per line in texive_packages
 # We need to change the working directory before including a file

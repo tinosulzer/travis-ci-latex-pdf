@@ -8,11 +8,15 @@ if ! command -v conda > /dev/null; then
   bash miniconda.sh -b -p $HOME/miniconda -u;
   conda config --add channels conda-forge;
   conda config --set always_yes yes;
-  conda update --all;
-  conda install tectonic==0.1.8;
+  conda install tectonic==0.1.10;
 fi
 conda install -c malramsay biber==2.5 --yes
 conda info -a
+
+# Workaround until tectonic 0.1.11 is available
+sudo mkdir -p ~/.config/Tectonic/
+echo "[[default_bundles]]" | sudo tee --append ~/.config/Tectonic/config.toml
+sudo echo "url = \"https://tectonic.newton.cx/bundles/tlextras-2018.1r0/bundle.tar\"" | sudo tee --append ~/.config/Tectonic/config.toml
 
 cd ${TRAVIS_BUILD_DIR}/src/
 tectonic --keep-intermediates --reruns 0 ./main.tex
