@@ -8,6 +8,12 @@ jobs:
       sudo: required
       script: chmod +x $TRAVIS_BUILD_DIR/test/tectonic-docker-test.sh && $TRAVIS_BUILD_DIR/test/tectonic-docker-test.sh
     - script: chmod +x $TRAVIS_BUILD_DIR/test/tectonic-miniconda-test.sh && $TRAVIS_BUILD_DIR/test/tectonic-miniconda-test.sh
+    - script:
+      - chmod +x $TRAVIS_BUILD_DIR/test/texlive-docker-test.sh
+      # Change working directory to find the right .travis.yml for testing
+      - cd test
+      - texlive-docker-test.sh
+      - cd ..
     - script: chmod +x $TRAVIS_BUILD_DIR/test/texlive-test.sh && $TRAVIS_BUILD_DIR/test/texlive-test.sh
 
 cache:
