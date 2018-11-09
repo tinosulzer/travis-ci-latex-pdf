@@ -10,12 +10,12 @@ This repository contains an overview of the methods you could use to build your 
 You want that because then every time you push it will automatically check if you pushed valid LaTeX.
 If you are looking for instructions to build LaTeX locally, look [here](https://github.com/Ruben-Sten/TeXiFy-IDEA#installation-instructions).
 
-# Choose your tools
+# Choose your build method
 
-## 1. Tectonic
+## Tectonic
 
 Thanks to [Dan Foreman-Mackey](http://dfm.io/posts/travis-latex/) for writing about Tectonic.
-This method does not use the pdflatex engine to compile, but [Tectonic](https://tectonic-typesetting.github.io) which is a fork of XeTeX (thanks to [ShreevatsaR](https://tex.stackexchange.com/users/48/shreevatsar) for pointing this out). 
+The next methods do not use the pdflatex engine to compile, but [Tectonic](https://tectonic-typesetting.github.io) which is a fork of XeTeX (thanks to [ShreevatsaR](https://tex.stackexchange.com/users/48/shreevatsar) for pointing this out). 
 
 #### Pro:
 * automatically loops TeX and BibTeX as needed, and only as much as needed
@@ -29,7 +29,7 @@ This method does not use the pdflatex engine to compile, but [Tectonic](https://
 
 We will quickly compare two methods to use Tectonic.
 
-## 1a. Docker image with Tectonic
+## 1. Docker image with Tectonic
 
 Thanks to [Norbert Pozar (@rekka)](https://tectonic.newton.cx/t/small-docker-image-for-tectonic/133?u=phpirates) for providing the original Docker image.
 [Manuel (@WtfJoke)](https://github.com/WtfJoke) extended it by integrating biber.
@@ -37,7 +37,6 @@ Docker provides the ability to download a pre-installed Tectonic and then run it
 
 #### Pro:
 * Tectonic is ready really fast, because downloading the image is all it takes
-* The complete build time is the fastest of all methods
 * The Docker image is really small, around 75MB
 * Works with bibtex automatically
 * Can automatically deploy pdfs
@@ -50,7 +49,7 @@ Build time example file: two minutes
 
 Want this? Instructions [below](#tectonic-docker).
 
-## 1b. Miniconda with Tectonic
+## 2. Miniconda with Tectonic
 
 #### Pro:
 
@@ -65,8 +64,27 @@ Build time example file: 1-2 minutes
 
 Want this? Instructions [below](#tectonic).
 
+## 3. Docker image with TeX Live
 
-## 2. TeX Live with pdflatex
+This method downloads a docker image which contains a small TeX Live installation.
+At the moment it uses `latexmk` to compile pdfs which is configured to run `pdflatex` by default, but it should be easy to configure it for other tex engines.
+
+#### Pro:
+
+* Very clean build files, only a very short `.travis.yml` file is needed.
+* You can specify [options](https://github.com/Strauman/travis-latexbuild/tree/master#configuration-options) in your `.travis.yml`, for example which files to build and which packages to install.
+* You can also provide extra `latexmk` [flags](https://man.cx/latexmk#heading4), for example `-dvi` to generate a dvi file.
+
+#### Con:
+
+* Packages are (not yet) cached, so the build time is long
+* You still need to specify which packages you require to be installed
+
+Build time example file: 4 minutes
+
+Want this? Instructions [below](#texlive-docker).
+
+## 4. TeX Live with pdflatex
 
 Thanks to [Joseph Wright](https://tex.stackexchange.com/users/73/joseph-wright) who pointed out that they use something based on this setup for LaTeX3 development.
 
@@ -77,12 +95,13 @@ Thanks to [Joseph Wright](https://tex.stackexchange.com/users/73/joseph-wright) 
 #### Con:
 * You need to specify by hand which packages you need, and some may not be available in the package repository or under different names or with other packages as requirements.
 * You need to specify by hand how much times to compile to make sure references, indices and bibtex references work.
+* You need to copy extra build files to each repository, besides the `.travis.yml`.
 
 Build time example file: 1-2 minutes
 
 Want this? Instructions [below](#pdflatex).
 
-## 3. TeX Live and pdflatex via tinytex with R.
+## 5. TeX Live and pdflatex via tinytex with R.
 
 Thanks to [Hugh](https://tex.stackexchange.com/users/18414/hugh) for pointing out this option.
 
@@ -134,6 +153,15 @@ tectonic ./main.tex
 ```
 
 * Following this project, Malcolm Ramsay has a great [blog post](https://malramsay.com/post/compiling_latex_on_travis/) documenting this use case in a very complete way.
+
+## <a name="texlive-docker">Instructions for building with TeX Live from a Docker image</a>
+
+* Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
+* Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
+* Copy [`3-texlive-docker/.travis.yml`](3-texlive-docker/.travis.yml) and specify which tex files you want to build in the `build-pattern` option.
+* Add all the required LaTeX packages to the `packages` option, by checking at https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained (which may be different than the LaTeX package name).
+* Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
+* For deploying to GitHub releases, see the notes [below](#deploy).
 
 ## <a name="pdflatex">Instructions for building with pdflatex and TeX Live</a>
 
