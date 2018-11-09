@@ -66,7 +66,7 @@ Want this? Instructions [below](#tectonic).
 
 ## 3. Docker image with TeX Live
 
-This method downloads a docker image which contains a small TeX Live installation.
+This method downloads a docker image which contains a small TeX Live installation. Thanks to [Andreas Strauman](https://github.com/Strauman/travis-latexbuild/) for figuring this out.
 At the moment it uses `latexmk` to compile pdfs which is configured to run `pdflatex` by default, but it should be easy to configure it for other tex engines.
 
 #### Pro:
