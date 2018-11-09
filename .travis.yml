@@ -12,7 +12,7 @@ jobs:
       - chmod +x $TRAVIS_BUILD_DIR/test/texlive-docker-test.sh
       # Change working directory to find the right .travis.yml for testing
       - cd test
-      - texlive-docker-test.sh
+      - ./texlive-docker-test.sh
       - cd ..
     - script: chmod +x $TRAVIS_BUILD_DIR/test/texlive-test.sh && $TRAVIS_BUILD_DIR/test/texlive-test.sh
 
