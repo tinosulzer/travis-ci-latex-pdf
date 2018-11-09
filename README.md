@@ -66,7 +66,7 @@ Want this? Instructions [below](#tectonic).
 
 ## 3. Docker image with TeX Live
 
-This method downloads a docker image which contains a small TeX Live installation. Thanks to [Andreas Strauman](https://github.com/Strauman/travis-latexbuild/) for figuring this out.
+This method downloads a docker image which contains a small TeX Live installation. Thanks to [Andreas Strauman](https://github.com/Strauman/travis-latexbuild/) for figuring this out, give his [tex.stackexchange.com](https://tex.stackexchange.com/a/450256/98850) answer an upvote if you like it!
 At the moment it uses `latexmk` to compile pdfs which is configured to run `pdflatex` by default, but it should be easy to configure it for other tex engines.
 
 #### Pro:
@@ -224,6 +224,9 @@ Note that sometimes `tlmgr` selects a broken mirror to download TeX Live from, s
 
 ## <a name="deploy">To automatically deploy pdfs to GitHub release</a>
 ### First time setup
+
+We will add a configuration to the `.travis.yml` such that a pdf will be automatically uploaded to GitHub releases when you tag a commit, also see the [Travis documentation](https://docs.travis-ci.com/user/deployment/releases/).
+
 * We will generate a GitHub OAuth key so Travis can push to your releases, with the important difference (compared to just gettting it via GitHub settings) that it's encryped so you can push it safely.
 * (Windows) [Download ruby](https://rubyinstaller.org/downloads/) and at at end of the installation make sure to install MSYS including development kit.
 * Run `gem install travis --no-rdoc --no-ri` to install the Travis Command-line Tool.
