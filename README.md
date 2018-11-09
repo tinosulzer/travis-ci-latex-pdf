@@ -107,7 +107,7 @@ Want this? Instructions [below](#tinytex).
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy [`1a-tectonic-docker/.travis.yml`](1a-tectonic-docker/.travis.yml) and specify the right tex file in the line with `docker run`. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
+* Copy [`1-tectonic-docker/.travis.yml`](1-tectonic-docker/.travis.yml) and specify the right tex file in the line with `docker run`. If your tex file is not in the `src/` folder, you also need to change the path in that line after `$TRAVIS_BUILD_DIR`.
 * If you want to compile multiple files, you can replace `tectonic main.tex` by `tectonic main.tex; tectonic main2.tex`.
 * If you want to use biber, you can use `tectonic --keep-intermediates --reruns 0 main.tex; biber main; tectonic main.tex`
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
@@ -117,7 +117,7 @@ Want this? Instructions [below](#tinytex).
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
 * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy [`1b-tectonic-miniconda/.travis.yml`](1b-tectonic-miniconda/.travis.yml) and specify the right tex file in the `script` section in `.travis.yml`. You can uncomment the `makeindex` line and the extra `tectonic` call if you want to use an index.
+* Copy [`2-tectonic-miniconda/.travis.yml`](2-tectonic-miniconda/.travis.yml) and specify the right tex file in the `script` section in `.travis.yml`. You can uncomment the `makeindex` line and the extra `tectonic` call if you want to use an index.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
 
@@ -162,7 +162,7 @@ This repo contains:
 
 * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
  * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy the files in the folder [`2-texlive-pdflatex`](2-texlive-pdflatex) to your repo, so `.travis.yml` and the `texlive/` folder.
+* Copy the files in the folder [`4-texlive`](4-texlive) to your repo, so `.travis.yml` and the `texlive/` folder.
 * Specify the right tex file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`.
 * Add all the required LaTeX packages to `texlive/texlive_packages`, by checking at https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained (which may be different than the LaTeX package name).
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
@@ -176,9 +176,9 @@ with
 ```yaml
 install:
   - mkdir ./texlive/
-  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive.profile > ./texlive/texlive.profile
-  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive_packages > ./texlive/texlive_packages
-  - curl https://raw.githubusercontent.com/PHPirates/travis-ci-latex-pdf/master/2-texlive-pdflatex/texlive/texlive_install.sh > ./texlive/texlive_install.sh
+  - 4-texlive
+  - 4-texlive
+  - 4-texlive
   - source ./texlive/texlive_install.sh
 ```
 * Preferably you fork this repo so you can maintain your own build files with the right packages.
@@ -189,7 +189,7 @@ Note that sometimes `tlmgr` selects a broken mirror to download TeX Live from, s
 
 * * Install the Travis GitHub App by going to the [Marketplace](https://github.com/marketplace/travis-ci), scroll down, select Open Source (also when you want to use private repos) and select 'Install it for free', then 'Complete order and begin installation'. 
   * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
-* Copy the files in the folder `3-tinytex` to your repo, so `.travis.yml` and `install_texlive.R`.
+* Copy the files in the folder `5-tinytex` to your repo, so `.travis.yml` and `install_texlive.R`.
 * Specify the right tex file in `.travis.yml`.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
