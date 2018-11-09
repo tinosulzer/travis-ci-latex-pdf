@@ -6,9 +6,9 @@ jobs:
     # Each - starts a separate job
     - services: docker
       sudo: required
-      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1a.sh && $TRAVIS_BUILD_DIR/test/compile-1a.sh
-    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-1.sh && $TRAVIS_BUILD_DIR/test/compile-1.sh
-    - script: chmod +x $TRAVIS_BUILD_DIR/test/compile-2.sh && $TRAVIS_BUILD_DIR/test/compile-2.sh
+      script: chmod +x $TRAVIS_BUILD_DIR/test/tectonic-docker-test.sh && $TRAVIS_BUILD_DIR/test/tectonic-docker-test.sh
+    - script: chmod +x $TRAVIS_BUILD_DIR/test/tectonic-miniconda-test.sh && $TRAVIS_BUILD_DIR/test/tectonic-miniconda-test.sh
+    - script: chmod +x $TRAVIS_BUILD_DIR/test/texlive-test.sh && $TRAVIS_BUILD_DIR/test/texlive-test.sh
 
 cache:
   directories:
@@ -25,7 +25,7 @@ cache:
 #      pandoc: false
 #      warnings_are_errors: false
 #      install: echo "The install step is required but does nothing now."
-#      script: chmod +x $TRAVIS_BUILD_DIR/test/compile-3.sh && $TRAVIS_BUILD_DIR/test/compile-3.sh
+#      script: chmod +x $TRAVIS_BUILD_DIR/test/tinytex-test.sh && $TRAVIS_BUILD_DIR/test/tinytex-test.sh
 #      cache:
 #        directories:
 #          - packages
