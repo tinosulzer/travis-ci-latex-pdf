@@ -1,3 +1,6 @@
+/1-tectonic-docker/ @WtfJoke
+/test/tectonic-docker-test.sh @WtfJoke
+
 /3-texlive-docker/ @Strauman
 /test/texlive-docker-test.sh @Strauman
 
