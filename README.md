@@ -15,7 +15,7 @@ If you are looking for instructions to build LaTeX locally, look [here](https://
 ## Tectonic
 
 Thanks to [Dan Foreman-Mackey](http://dfm.io/posts/travis-latex/) for writing about Tectonic.
-The next methods do not use the pdflatex engine to compile, but [Tectonic](https://tectonic-typesetting.github.io) which is a fork of XeTeX (thanks to [ShreevatsaR](https://tex.stackexchange.com/users/48/shreevatsar) for pointing this out). 
+The first two methods do not use the pdflatex engine to compile, but [Tectonic](https://tectonic-typesetting.github.io) which is a fork of XeTeX (thanks to [ShreevatsaR](https://tex.stackexchange.com/users/48/shreevatsar) for pointing this out). 
 
 #### Pro:
 * automatically loops TeX and BibTeX as needed, and only as much as needed
@@ -27,7 +27,7 @@ The next methods do not use the pdflatex engine to compile, but [Tectonic](https
 #### Con:
 * Tectonic does not support the `-shell-escape` flag at the moment (see [tectonic/#38](https://github.com/tectonic-typesetting/tectonic/issues/38)), which is required for example by the minted package. The pdflatex way (below) has been tested to work with the minted package.
 
-We will quickly compare two methods to use Tectonic.
+We will quickly compare two methods to use Tectonic, after that we will discuss more conventional methods which can compile with pfdlatex, lualatex etc.
 
 ## 1. Docker image with Tectonic
 
@@ -64,7 +64,7 @@ Build time example file: 1-2 minutes
 
 Want this? Instructions [below](#tectonic).
 
-## 3. Docker image with TeX Live
+## 3. Docker image with TeX Live (latexmk, pfdlatex, lualatex, etc.)
 
 This method downloads a docker image which contains a small TeX Live installation. Thanks to [Andreas Strauman](https://github.com/Strauman/travis-latexbuild/) for figuring this out, give his [tex.stackexchange.com](https://tex.stackexchange.com/a/450256/98850) answer an upvote if you like it!
 At the moment it uses `latexmk` to compile pdfs which is configured to run `pdflatex` by default, but it should be easy to configure it for other tex engines.
