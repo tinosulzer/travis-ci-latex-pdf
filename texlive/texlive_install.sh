@@ -8,7 +8,7 @@
 # required
 
 # Find directory this file is in, to find the texlive.profile file.
-BASEDIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+#BASEDIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
 # See if there is a cached version of TL available
 export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
