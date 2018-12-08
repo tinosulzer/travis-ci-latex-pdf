@@ -39,7 +39,7 @@ tlmgr install texliveonfly
 #tlmgr install collection-latex
 
 # Install babel languages
-#tlmgr install collection-langeuropean
+tlmgr install collection-langeuropean
 
 # Common fonts with hard to debug errors if not found
 #tlmgr install collection-fontsrecommended
