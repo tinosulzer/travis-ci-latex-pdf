@@ -91,9 +91,9 @@ Thanks to [Joseph Wright](https://tex.stackexchange.com/users/73/joseph-wright) 
 #### Pro:
 * Uses pdflatex to compile, this can be a requirement for some cases like the minted package.
 * Fast, because of caching.
+* Almost all required packages are downloaded automatically
 
 #### Con:
-* You need to specify by hand which packages you need, and some may not be available in the package repository or under different names or with other packages as requirements.
 * You need to specify by hand how much times to compile to make sure references, indices and bibtex references work.
 * You need to copy extra build files to each repository, besides the `.travis.yml`.
 
@@ -173,18 +173,6 @@ This repo contains:
 - The TeX Live install script `texlive_install.sh` including profile `texlive/texlive.profile` (specifies for example the TeX Live scheme)
 - A Travis configuration file
 - Demonstration LaTeX files in `src/`
-- Besides the list of packages that get installed in `texlive_install.sh`, you can see a demonstration list of packages in `main.tex` which you can all use with this install.
-
-### Features
-
-* Add the extra packages you use which are not included in the TeX Live basic scheme to the install script.
-* The currently used package index is [here](http://ctan.mirrors.hoobly.com/systems/texlive/tlnet/archive/).
-* Same for other document classes.
-* Supports file inclusion.
-* Caches TeX Live and packages, also speeds up build time.
-* Works with (at least) BiBTeX.
-
-
 
 ### Instructions
 
@@ -192,9 +180,9 @@ This repo contains:
  * Now you should be in Personal settings | Applications | Travis CI | Configure and you can allow access to repositories, either select repos or all repos.
 * Copy the files in the folder [`4-texlive`](4-texlive) to your repo, so `.travis.yml` and the `texlive/` folder.
 * Specify the right tex file in the `.travis.yml`. Possibly you also need to change the folder in `before_script` if not using `src/`.
-* Add all the required LaTeX packages to `texlive/texlive_packages`, by checking at https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained (which may be different than the LaTeX package name).
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 (Thanks to [@jason-neal](https://github.com/PHPirates/travis-ci-latex-pdf/pull/6) for improving this)
+* If the build fails because some package is missing you have to add it manually. This configuration uses the `texliveonfly` package which tries to download missing packages but sometimes the error message is non-standard and that fails. In that case, put the package you want to install in `texlive/texlive_packages`, by checking at https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained (which may be different than the LaTeX package name). If you find a package which is not automatically downloaded, it would be great if you could let us known by submitting an issue.
 * Tip from [gvacaliuc](https://github.com/gvacaliuc/travis-ci-latex-pdf): In order to maintain the install scripts in a central repo and link to them, you could also just copy `.travis.yml` and replace
 ```yaml
 install:
