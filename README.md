@@ -131,6 +131,7 @@ Want this? Instructions [below](#tinytex).
 * If you want to use biber, you can use `tectonic --keep-intermediates --reruns 0 main.tex; biber main; tectonic main.tex`
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
+* Have a look at the [Tips](#tips).
 * If your build doesn't start, see [Troubleshooting](#troubleshooting).
 
 ## <a name="tectonic">Instructions for building with Miniconda and Tectonic</a>
@@ -140,6 +141,7 @@ Want this? Instructions [below](#tinytex).
 * Copy [`2-tectonic-miniconda/.travis.yml`](2-tectonic-miniconda/.travis.yml) and specify the right tex file in the `script` section in `.travis.yml`. You can uncomment the `makeindex` line and the extra `tectonic` call if you want to use an index.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
+* Have a look at the [Tips](#tips).
 * If your build doesn't start, see [Troubleshooting](#troubleshooting).
 
 ### <a name="biber">Separate instructions for adding biber to your Miniconda and Tectonic setup</a>
@@ -164,6 +166,7 @@ tectonic ./main.tex
 * Add all the required LaTeX packages to the `packages` option, by checking at https://www.ctan.org/pkg/some-package to see in which TeX Live package it is contained (which may be different than the LaTeX package name).
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
+* Have a look at the [Tips](#tips).
 * If your build doesn't start, see [Troubleshooting](#troubleshooting).
 
 ## <a name="pdflatex">Instructions for building with pdflatex and TeX Live</a>
@@ -212,6 +215,7 @@ Note that sometimes `tlmgr` selects a broken mirror to download TeX Live from, s
 * Specify the right tex file in `.travis.yml`.
 * Commit and push, you can view your repositories at [travis-ci.com](https://travis-ci.com/).
 * For deploying to GitHub releases, see the notes [below](#deploy).
+* Have a look at the [Tips](#tips).
 * If your build doesn't start, see [Troubleshooting](#troubleshooting).
 
 ## <a name="deploy">To automatically deploy pdfs to GitHub release</a>
@@ -223,7 +227,6 @@ We will add a configuration to the `.travis.yml` such that a pdf will be automat
 * (Windows) [Download ruby](https://rubyinstaller.org/downloads/) and at at end of the installation make sure to install MSYS including development kit.
 * Run `gem install travis --no-rdoc --no-ri` to install the Travis Command-line Tool.
 ### For every new project
-* Remove the `deploy` section in the `.travis.yml` or use `--force` in the next command.
 * Go to the directory of your repository, open the command prompt (Windows: <kbd>SHIFT</kbd>+<kbd>F10</kbd> <kbd>W</kbd> <kbd>ENTER</kbd>) and run `travis setup releases --pro`. Specify your GitHub credentials, and fill in anything for File to Upload.
 * Replace everything below your encryped api key with (changing the path to your pdf file, probably the same folder as your tex file is in)
 ```yml
@@ -237,6 +240,9 @@ We will add a configuration to the `.travis.yml` such that a pdf will be automat
 ```
 * Commit and push.
 * If you are ready to release, just tag and push.
+
+## <a name="tips">Tips</a>
+* You can tell Travis to skip the build for a certain commit by prefixing the commit message with `[ci skip]`.
 * If you want the badge in your readme, just copy the code below to your readme and change the links.
 
 Markdown:
@@ -249,7 +255,7 @@ reStructuredText:
     :target: https://travis-ci.com/username/reponame
     :alt: Build Status
 ```
-* Probably you want to edit settings on Travis to not build both on pull request and branch updates, and cancel running jobs if new ones are pushed.
+* You may want to edit settings on Travis to not build both on pull request and branch updates, and cancel running jobs if new ones are pushed.
 
 ## <a name="troubleshooting">Troubleshooting</a>
 
@@ -259,7 +265,6 @@ You can also manually trigger a build there.
 If you do not understand why your build is failing, it may help to run the relevant commands on a local Ubuntu system, if you have one.
 
 ## Notes
-* You can tell Travis to skip the build for a certain commit by prefixing the commit message with `[ci skip]`.
 * There are much more CI services than just Travis, for example CircleCI or SemaphoreCI and [much more](https://github.com/ligurio/awesome-ci). If you manage to use one of them, it would be great if you could report back!
 
 I also put some of these instructions on the [TeX Stackexchange](https://tex.stackexchange.com/questions/398830/how-to-build-my-latex-automatically-with-pdflatex-using-travis-ci/398831#398831).
