@@ -284,9 +284,13 @@ Please contribute if you can help with this!
 Some links to get started:
 
 https://tex.stackexchange.com/questions/459484/compiling-latex-files-automatically-with-gitlab-ci
+
 https://www.vipinajayakumar.com/continuous-integration-of-latex-projects-with-gitlab-pages.html
+
 https://sayantangkhan.github.io/latex-gitlab-ci.html
+
 https://tex.stackexchange.com/questions/412740/gitlab-ci-runner-with-relative-paths-in-main-tex
+
 https://tex.stackexchange.com/questions/437553/gitlab-ci-using-miktex-docker-image
 
 <!-- https://miktex.org/howto/miktex-docker -->
