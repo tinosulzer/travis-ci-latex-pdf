@@ -9,6 +9,7 @@ Write LaTeX, push to git, let Travis automatically build your file and release a
 This repository contains an overview of the methods you could use to build your LaTeX on a remote server (continuous integration server).
 You want that because then every time you push it will automatically check if you pushed valid LaTeX.
 If you are looking for instructions to build LaTeX locally, look [here](https://github.com/Ruben-Sten/TeXiFy-IDEA#installation-instructions).
+If you are looking for instructions to build LaTeX on GitLab CI, have a look [below](#gitlab).
 
 # Choose your build method
 
@@ -275,3 +276,17 @@ Also see harshjv's original [blog post](https://harshjv.github.io/blog/document-
 ## Contributing
 
 If you want to add/update a method to build LaTeX, look in the [contributing guidelines](.github/contributing.rst).
+
+# <a name="gitlab">GitLab CI</a>
+
+A more extensive overview of configurations for GitLab CI will come in the future, either in this or an other repo.
+Please contribute if you can help with this!
+Some links to get started:
+
+https://tex.stackexchange.com/questions/459484/compiling-latex-files-automatically-with-gitlab-ci
+https://www.vipinajayakumar.com/continuous-integration-of-latex-projects-with-gitlab-pages.html
+https://sayantangkhan.github.io/latex-gitlab-ci.html
+https://tex.stackexchange.com/questions/412740/gitlab-ci-runner-with-relative-paths-in-main-tex
+https://tex.stackexchange.com/questions/437553/gitlab-ci-using-miktex-docker-image
+
+<!-- https://miktex.org/howto/miktex-docker -->
