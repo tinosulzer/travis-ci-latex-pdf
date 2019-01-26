@@ -11,4 +11,4 @@ cd ${TRAVIS_BUILD_DIR}/src/
 #texliveonfly ./main.tex
 
 #texliveonfly --arguments="--shell-escape" ./minted.tex
-pfdlatex --shell-escape ./minted.tex
+pdflatex --shell-escape ./minted.tex
