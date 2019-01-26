@@ -38,8 +38,8 @@ tlmgr install collection-langeuropean
 
 # Then you can add one package per line in the texlive_packages file
 # We need to change the working directory before including a file
-#cd "$(dirname "${BASH_SOURCE[0]}")"
-#tlmgr install $(cat texlive_packages)
+cd "$(dirname "${BASH_SOURCE[0]}")"
+tlmgr install $(cat texlive_packages)
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
