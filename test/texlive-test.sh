@@ -8,6 +8,7 @@ cd ${TRAVIS_BUILD_DIR}/4-texlive/
 source ${TRAVIS_BUILD_DIR}/4-texlive/texlive/texlive_install.sh
 
 cd ${TRAVIS_BUILD_DIR}/src/
-texliveonfly ./main.tex
+#texliveonfly ./main.tex
 
-texliveonfly --arguments="--shell-escape" ./minted.tex
+#texliveonfly --arguments="--shell-escape" ./minted.tex
+pfdlatex --shell-escape ./minted.tex
