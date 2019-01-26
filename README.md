@@ -90,9 +90,10 @@ Want this? Instructions [below](#texlive-docker).
 Thanks to [Joseph Wright](https://tex.stackexchange.com/users/73/joseph-wright) who pointed out that they use something based on this setup for LaTeX3 development.
 
 #### Pro:
-* Uses pdflatex to compile, this can be a requirement for some cases like the minted package.
-* Fast, because of caching.
+* Uses pdflatex to compile, this can be a requirement for some cases like the `minted` package.
+* Fast, because of caching
 * Almost all required packages are downloaded automatically
+* Tested to work with the `minted` package
 
 #### Con:
 * You need to specify by hand how much times to compile to make sure references, indices and bibtex references work.
